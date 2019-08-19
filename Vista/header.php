@@ -56,7 +56,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href="../Vista/contacto.php">Contacto</a></li>
 							<?php 
 								if (isset($_SESSION['user'])) {
-									echo '<li><a href="Vista/login.php">'.$user->getCurrentUser().'</a></li>';
+									echo '<li><a href="../Controlador/controlador_usuario.php?op=2">'.$user->getCurrentUser().'</a></li>';
 									echo '<li><a href="../Controlador/controlador_sneakers.php?op=2">Cerrar Sesion</a></li>';
 								}else{  
 							?>

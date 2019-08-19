@@ -8,7 +8,8 @@
 			insertarUsuario();
 			header('location:../index.php');
 			break;
-		
+		case 2:
+			editarUsuario();
 		default:
 			# code...
 			break;
@@ -32,5 +33,13 @@
 		$obj->setUsu($usu);
 		$obj->setPass($pass);
 		$obj->insertarUsu();		
+	}
+
+	function editarUsuario(){
+		$obj = new Usuario();
+		$id = $_GET['id'];
+
+		$datos = $obj->editarUsu($id);
+		include '../Vista/usuario.php';
 	}
 ?>

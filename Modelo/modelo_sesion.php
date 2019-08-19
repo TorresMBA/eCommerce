@@ -26,7 +26,7 @@
 
 		public function userExist($user, $pass){
 			$md5 = md5($pass);
-			$sql = $this->db->prepare('SELECT * FROM LOGIN WHERE NOM_USU = :USER AND PASSWORD = :PASS');
+			$sql = $this->db->prepare('SELECT * FROM LOGIN WHERE NOM_USU = :USER AND PASS = :PASS');
 			$sql->execute(['USER' => $user, 'PASS' => $pass]);
 
 			if ($sql->rowCount()) {

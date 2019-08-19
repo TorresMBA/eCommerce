@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -41,8 +42,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href="Vista/404.php">Team</a></li>
 							<li><a href="Controlador/controlador_sneakers.php?op=1">Comprar Ahora</a></li>
 							<li><a href="Vista/contacto.php">Contacto</a></li>
-							<li><a href="Vista/login.php">Login</a></li>
-							<li><a href="Vista/registrar.php">Registrarse</a></li>
+							<?php 
+								if (isset($_SESSION['user'])) {
+							?>
+									<li><a href="../Controlador/controlador_usuario.php?op=2&id=<?php echo $fila['ID_LOG']?>"
+										><?php echo $user->getCurrentUser() ?></a></li>
+									<li><a href="../Controlador/controlador_sesion.php?op=2">Cerrar Sesion</a></li>
+							<?php
+								}else{  
+							?>
+								<li><a href="Vista/login.php">Login</a></li>
+								<li><a href="Vista/registrar.php">Registrarse</a></li>
+							<?php 
+								}
+							?>
 						</ul>
 					</nav>
 				</div>

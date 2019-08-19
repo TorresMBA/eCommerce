@@ -9,7 +9,7 @@
 		private $pass;
 
 		private $db;
-		private $lista_usu;
+		private $lista;
 
 		public function __construct(){
 			include 'Conexion.php';
@@ -85,6 +85,14 @@
 			$dato->bindParam(6, $this->usu);
 			$dato->bindParam(7, $this->pass);
 			$dato->execute();
+		}
+
+		public function editarUsu($id){
+			$reg = $this->bd ->query("call EDITARUSUARIO (".$id.")"  );
+            while ($fila = $reg->fetch(PDO::FETCH_ASSOC) ){
+                $this->lista[] = $fila;
+            }
+            return ($this->lista);
 		}
 	}
 ?>

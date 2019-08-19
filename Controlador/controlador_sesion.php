@@ -1,5 +1,5 @@
 <?php
-	include_once '../Modelo/modelo_usuario.php';
+	include_once '../Modelo/modelo_sesion.php';
 
 	$user = new Usuario();
 	$op = $_GET['op'];
@@ -8,8 +8,8 @@
 			if (isset($_SESSION['user'])) {
 			$user->setUser($user->getCurrentUser());
 				
-			include_once '../Vista/index.php';
-				//header('location:../index.php');
+			include_once '../index.php';
+			//header('location:../index.php');
 		}else{
 			if (isset($_POST['username']) and isset($_POST['password'])) {
 				$userForm = $_POST['username'];
@@ -29,16 +29,11 @@
 			break;
 		case 2:
 			$user -> closeSession();
-			header('location:../Vista/index.php');
+			header('location:../index.php');
 			break;
 		case 3:
-			ingresarUsuario();
 		default:
 			# code...
 			break;
 	}
-
-	function ingresarUsuario(){
-		
-	}	
 ?>
