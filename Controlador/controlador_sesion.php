@@ -9,7 +9,6 @@
 			$user->setUser($user->getCurrentUser());
 				
 			include_once '../index.php';
-			//header('location:../index.php');
 		}else{
 			if (isset($_POST['username']) and isset($_POST['password'])) {
 				$userForm = $_POST['username'];

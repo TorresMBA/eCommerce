@@ -6,10 +6,11 @@
 	switch ($op) {
 		case 1:
 			insertarUsuario();
-			header('location:../index.php');
+			//header('location:../index.php');
 			break;
 		case 2:
 			editarUsuario();
+			include '../Vista/usuario.php';
 		default:
 			# code...
 			break;
@@ -40,6 +41,5 @@
 		$id = $_GET['id'];
 
 		$datos = $obj->editarUsu($id);
-		include '../Vista/usuario.php';
 	}
 ?>

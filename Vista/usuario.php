@@ -6,7 +6,7 @@
 			<div class="inner_section_w3ls">
 				<div class="col-md-7 contact_grid_right">
 					<?php
-						foreach ($dato as $fila) {				
+						foreach ($datos as $fila) {				
 					?>
 					<h6>USUARIO <?php echo $fila['NOM_USU'] ?></h6>
 					<form action="../Controlador/controlador_usuario.php?op=1" method="post">

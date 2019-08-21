@@ -31,12 +31,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="//fonts.googleapis.com/css?family=Montserrat:100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
 	    rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
-	<script type="text/javascript">
-		function validar(){
-			var nom = document.getElementById('Name').value;
-			alert(nom);
-		}
-	</script>
 </head>
 <body>
 	<div class="banner_top innerpage" id="home">
@@ -53,18 +47,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href="../Vista/nosotros.php">Nostros</a></li>
 							<li><a href="../Vista/404.php">Team</a></li>
 							<li><a href="../Controlador/controlador_sneakers.php?op=1">Comprar Ahora</a></li>
-							<li><a href="../Vista/contacto.php">Contacto</a></li>
-							<?php 
-								if (isset($_SESSION['user'])) {
-									echo '<li><a href="../Controlador/controlador_usuario.php?op=2">'.$user->getCurrentUser().'</a></li>';
-									echo '<li><a href="../Controlador/controlador_sneakers.php?op=2">Cerrar Sesion</a></li>';
-								}else{  
-							?>
-								<li><a href="../Vista/login.php">Login</a></li>
-								<li><a href="../Vista/registrar.php">Registrarse</a></li>
-							<?php 
-								}
-							?>
+							<li><a href="../Vista/contacto.php">Contacto</a></li>					
+							<li><a href="../Vista/login.php">Login</a></li>
+							<li><a href="../Vista/registrar.php">Registrarse</a></li>
 						</ul>
 					</nav>
 				</div>
