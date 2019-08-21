@@ -1,38 +1,51 @@
 <?php
-	include_once '../Modelo/modelo_sesion.php';
+	session_start();
+	include_once '../Modelo/modelo_usuarios.php';
 
-	$user = new Usuario();
 	$op = $_GET['op'];
 	switch ($op) {
 		case 1:
-			if (isset($_SESSION['user'])) {
-			$user->setUser($user->getCurrentUser());
-				
-			include_once '../index.php';
-		}else{
-			if (isset($_POST['username']) and isset($_POST['password'])) {
-				$userForm = $_POST['username'];
-				$passForm = $_POST['password'];
-				if ($user->userExist($userForm, $passForm)) {
-					$user->setCurrentUser($userForm);
-					$user->setUser($userForm);
-					include_once '../Vista/index.php';
-				}else{
-					$d = "nombre de usuario o password incorrecot";
-					include_once '../Vista/login.php';
-				}
-			}else{
-				include_once '../Vista/login.php';
-			}
-		}
+			validar();
 			break;
 		case 2:
-			$user -> closeSession();
+			cerrarSesion();
 			header('location:../index.php');
 			break;
 		case 3:
+			break;
 		default:
 			# code...
 			break;
+	}
+
+	function validar(){
+		$nom = $_POST['username'];
+    	$cla = $_POST['password'];
+
+    	$reg = new Usuario();
+    	$registro = $reg->validarUsu($nom, $cla);
+
+	    if (empty($registro)){  
+	         header('Location: ../Vista/login.php?valor=Verificar datos');
+	    }else{
+	        $_SESSION['usuario']= $nom;
+	        foreach ($registro as $dato) {
+	        	$id = $dato['ID_LOG'];
+	        	$rol = $dato['ID_ROL'];
+	        }
+	        switch ($rol) {
+	        	case 1:
+	        		header('Location: ../index.php?id='.$id.'&rol='.$rol);
+	        		break;
+	        	case 2: 
+	        		header('Location: ../index.php?id='.$id.'&rol='.$rol);
+	        		break;
+	        }        
+	    }	    
+	}
+
+	function cerrarSesion(){
+		session_unset();
+		session_destroy();
 	}
 ?>

@@ -1,18 +1,23 @@
-<?php include 'header.php'; ?>
+<?php 
+	include 'header.php'; 
+	 if (!isset($_SESSION['usuario'])){
+        header('Location: login.php');
+    }
+?>
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
-			<h3 class="head">Registro de Usuarios</h3>
+			<h3 class="head">Perfil</h3>
 			<p class="head_para">Add Some Description</p>
 			<div class="inner_section_w3ls">
 				<div class="col-md-7 contact_grid_right">
 					<?php
 						foreach ($datos as $fila) {				
 					?>
-					<h6>USUARIO <?php echo $fila['NOM_USU'] ?></h6>
+					<h6>Usuario: <?php echo $fila['NOM_USU'] ?></h6>
 					<form action="../Controlador/controlador_usuario.php?op=1" method="post">
 						<div class="col-md-6 col-sm-6 contact_left_grid">
-							<input type="text" name="id" placeholder="ID" required="" value="<?php echo $fila['ID_LOG'] ?>">
-							<input type="text" name="Name" placeholder="Nombre" required="" value="<?php echo $fila['NOMBRE'] ?>">
+							<input type="text" name="id" placeholder="ID" value="<?php echo $fila['ID_LOG'] ?>" disabled>
+							<input type="text" name="Name" placeholder="Nombre" required="" value="<?php echo $fila['NOMBRE'] ?>"><br><br>
 							<input type="text" name="Ape" placeholder="Apellido" required="" value="<?php echo $fila['APELLIDO'] ?>">
 							<input type="email" name="Email" placeholder="Email" required="" value="<?php echo $fila['EMAIL'] ?>">
 						</div>
@@ -20,11 +25,16 @@
 							<input type="text" name="Telephone" placeholder="Celular" required="" value="<?php echo $fila['CELULAR'] ?>">
 							<input type="text" name="Dirrecion" placeholder="Dirrecion" required="" value="<?php echo $fila['DIRRECION'] ?>"><br><br>
 							<input type="text" name="Usuario" placeholder="Usuario" required="" value="<?php echo $fila['NOM_USU'] ?>"><br><br>
-							<input type="text" name="Pass" placeholder="Contraseña" required="" value="<?php echo $fila['PASS'] ?>">
+							<input type="text" name="Pass" placeholder="Contraseña" required="" value="<?php echo $fila['PASS'] ?>"><br><br>
+							 <select>
+                                <option value="1" <?php if ($fila['ID_ROL'] == 1) echo 'selected'?> >Admnistrador</option>
+                                <option value="2" <?php if ($fila['ID_ROL'] == 2) echo 'selected'?> >Colaborador</option>
+                                <option value="3" <?php if ($fila['ID_ROL'] == 3) echo 'selected'?> >Cliente</option>
+                            </select>
 						</div>
 						<div class="clearfix">  </div>
 						<br>
-						<input type="submit" value="Registrar">
+						<input type="submit" value="Actualizar">
 					</form>
 
 					<?php 

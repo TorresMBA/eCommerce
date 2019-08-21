@@ -1,5 +1,6 @@
 <?php 
 	class Usuario{
+		private $id;
 		private $nom;
 		private $ape; 
 		private $mail;
@@ -13,9 +14,12 @@
 
 		public function __construct(){
 			include 'Conexion.php';
-			$obj = new Conexion();
 			$this->db = Conexion::conectar();
-			$this->usu = array();
+			$this->lista = array();
+		}
+
+		public function getId(){
+			return $this->id;
 		}
 
 		public function getNom(){
@@ -46,6 +50,10 @@
 			return $this->pass;
 		}
 
+		public function setId($id){
+			$this->id = $id;
+		}
+
 		public function setNom($nom){
 			$this->nom = $nom;
 		}
@@ -74,6 +82,14 @@
 			$this->pass = $pass;
 		}
 
+		public function listarUsu(){
+			$sql = $this->db->query("CALL LISTARUSUARIO");
+			while ($fila = $sql->fetch(PDO::FETCH_ASSOC)) {
+				$this->lista[] = $fila;
+			}
+			return $this->lista;
+		}
+
 		public function insertarUsu(){
 			$sql = "CALL INSERTARUSUARIOS (?,?,?,?,?,?,?)";
 			$dato = $this->db->prepare($sql);
@@ -88,11 +104,28 @@
 		}
 
 		public function editarUsu($id){
-			$reg = $this->bd ->query("call EDITARUSUARIO (".$id.")"  );
+			$sql = "CALL EDITARUSUARIO ('".$id."')";
+			$reg = $this->db->query($sql);
             while ($fila = $reg->fetch(PDO::FETCH_ASSOC) ){
                 $this->lista[] = $fila;
             }
-            return ($this->lista);
+            return $this->lista;
 		}
+
+		public function validarUsu($nom, $cla){
+	        $sql = "CALL VALIDARLOGIN('".$nom."','".$cla."')";        
+	        $login = $this->db->query($sql);
+	        while ($fila = $login->fetch(PDO::FETCH_ASSOC)){
+	            $this->lista[] =  $fila;
+	        }
+	        return $this->lista;
+    	}
+
+    	public function eliminarUsu(){
+    		$sql = "CALL ELIMINARUSUARIO (?)";
+            $sentencia = $this->db->prepare($sql);                
+            $sentencia->bindParam(1, $this->id);
+            $sentencia->execute();
+    	}
 	}
 ?>
