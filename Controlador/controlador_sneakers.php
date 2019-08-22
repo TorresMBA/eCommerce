@@ -5,7 +5,7 @@
 	switch ($opcion) {
 		case 1:
 			$obj = new modelo_sneakers();
-			$datos = $obj->listar_calzado();
+			$datos = $obj->listarCalzadoVista();
 			include '../Vista/shop.php';
 			break;
 		case 2:

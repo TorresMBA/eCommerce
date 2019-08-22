@@ -45,16 +45,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href="Controlador/controlador_sneakers.php?op=1">Comprar Ahora</a></li>
 							<li><a href="Vista/contacto.php">Contacto</a></li>
 							<?php
-								if (isset($_SESSION['usuario']) && $_GET['rol'] == 1) {									
+								if (isset($_SESSION['usuario']) && $_SESSION['rol'] == 1) {									
 									echo '<li><a href="Controlador/controlador_usuario.php?op=1">Listar Usuarios</a></li>';
 									echo '<li><a href="Controlador/controlador_producto.php?op=2">Ingresar Productos</a></li>';
-									echo '<li><a href="Controlador/controlador_usuario.php?op=3&id='.$_GET['id'].'">'.$_SESSION['usuario'].'</a></li>';
+									echo '<li><a href="Controlador/controlador_usuario.php?op=3&id='.$_SESSION['id'].'">'.$_SESSION['usuario'].'</a></li>';
 									echo '<li><a href="Controlador/controlador_sesion.php?op=2">Cerrar Sesion</a></li>';
-								}else{
-									if (isset($_SESSION['usuario']) && $_GET['rol'] == 2) {				
-										echo '<li><a href="Controlador/controlador_usuario.php?op=3&id='.$_GET['id'].'">'.$_SESSION['usuario'].'</a></li>';
+								}else{	
+									if (isset($_SESSION['usuario']) && $_SESSION['rol'] == 2) {
+										echo '<li><a href="Controlador/controlador_usuario.php?op=3&id='.$_SESSION['id'].'">'.$_SESSION['usuario'].'</a></li>';
 										echo '<li><a href="Controlador/controlador_sesion.php?op=2">Cerrar Sesion</a></li>';
-									}else{
+									}else{	
 							?>
 										<li><a href="Vista/login.php">Login</a></li>
 										<li><a href="Vista/registrar.php">Registrarse</a></li>

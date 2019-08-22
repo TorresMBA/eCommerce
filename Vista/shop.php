@@ -210,7 +210,7 @@
 							<div class="product-shoe-info shoe">
 								<div class="men-pro-item">
 									<div class="men-thumb-item">
-										<img src="../images/<?php echo $fila['FOTO'] ?>" alt="">
+										<img src="../images/img/<?php echo $fila['FOTO1'] ?>" alt="">
 										<div class="men-cart-pro">
 											<div class="inner-men-cart-pro">
 												<a href="../Controlador/controlador_sneakers.php?op=2&id=<?php echo $fila['COD_SEA']?>" class="link-product-add-cart">Ver Detalles</a>
@@ -219,6 +219,7 @@
 										<span class="product-new-top">New</span>
 									</div>
 									<div class="item-info-product">
+
 										<h4>
 											<a href="single.html"><?php echo $fila['NOMBRE'] ?></a>
 										</h4>
@@ -226,7 +227,9 @@
 											<div class="grid_meta">
 												<div class="product_price">
 													<div class="grid-price ">
-														<span class="money ">$ <?php echo $fila['PRECIO_NORMAL'] ?></span>
+														<h4><?php echo $fila['NOM_MARCA'] ?></h4>
+														<span class="money ">S/<?php echo $fila['PRECIO_NORMAL'] ?></span>
+
 													</div>
 												</div>
 												<ul class="stars">

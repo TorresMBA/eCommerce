@@ -62,8 +62,7 @@
 		
 	}
 
-	function eliminarUsuario(){
-		
+	function eliminarUsuario(){		
 		$id = $_GET['id'];
 
 		$obj = new Usuario();

@@ -12,14 +12,14 @@
 					<div class="flexslider">
 
 						<ul class="slides">
-							<li data-thumb="../images/<?php echo $fila['FOTO'] ?>">
-								<div class="thumb-image"> <img src="../images/<?php echo $fila['FOTO'] ?>" data-imagezoom="true" class="img-responsive"> </div>
+							<li data-thumb="../images/img/<?php echo $fila['FOTO2'] ?>">
+								<div class="thumb-image"> <img src="../images/img/<?php echo $fila['FOTO2'] ?>" data-imagezoom="true" class="img-responsive"> </div>
 							</li>
-							<li data-thumb="../images/d1.jpg">
-								<div class="thumb-image"> <img src="../images/<?php echo $fila['FOTO'] ?>" data-imagezoom="true" class="img-responsive"> </div>
+							<li data-thumb="../images/img/<?php echo $fila['FOTO3'] ?>">
+								<div class="thumb-image"> <img src="../images/img/<?php echo $fila['FOTO3'] ?>" data-imagezoom="true" class="img-responsive"> </div>
 							</li>
-							<li data-thumb="../images/d3.jpg">
-								<div class="thumb-image"> <img src="../images/<?php echo $fila['FOTO'] ?>" data-imagezoom="true" class="img-responsive"> </div>
+							<li data-thumb="../images/img/<?php echo $fila['FOTO4'] ?>">
+								<div class="thumb-image"> <img src="../images/img/<?php echo $fila['FOTO4'] ?>" data-imagezoom="true" class="img-responsive"> </div>
 							</li>
 						</ul>
 						<div class="clearfix"></div>
@@ -27,10 +27,10 @@
 				</div>
 			</div>
 			<div class="col-md-8 single-right-left simpleCart_shelfItem">
-				
-				<h3><?php echo $fila['NOMBRE'] ?></h3>
-				<p><span class="item_price">$<?php echo $fila['PRECIO_OFERTA']?></span>
-					<del>$<?php echo $fila['PRECIO_NORMAL'] ?></del>
+				<h3><?php echo $fila['NOM_MARCA'] ?></h3><br>
+				<h2><?php echo $fila['NOMBRE'] ?></h2>
+				<p><span class="item_price">S/<?php echo $fila['PRECIO_OFERTA']?></span>
+					<del>S/<?php echo $fila['PRECIO_NORMAL'] ?></del>
 				</p>
 				<div class="rating1">
 					<ul class="stars">
@@ -65,7 +65,7 @@
 				<div class="occasional">
 					<h5>Tipo :</h5>
 					<div class="colr ert">
-						<label class="radio"><?php echo $fila['TIPO'] ?></label>
+						<label class="radio"><?php echo $fila['NOM_TIPO'] ?></label>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
@@ -115,14 +115,13 @@
 			<div class="responsive_tabs">
 				<div id="horizontalTab">
 					<ul class="resp-tabs-list">
-						<li>Descripcion</li>
-						<li>Comentarios</li>
 						<li>Informacion</li>
+						<li>Comentarios</li>
+						<li>Especificaciones</li>
 					</ul>
 					<div class="resp-tabs-container">
 						<!--/tab_one-->
 						<div class="tab1">
-
 							<div class="single_page">
 								<h6><?php echo $fila['NOMBRE']?></h6>
 								<p><?PHP ECHO $fila['DESCRIPCION']?></p>	
@@ -130,7 +129,6 @@
 						</div>
 						<!--//tab_one-->
 						<div class="tab2">
-
 							<div class="single_page">
 								<div class="bootstrap-tab-text-grids">
 									<div class="bootstrap-tab-text-grid">
@@ -162,7 +160,6 @@
 							</div>
 						</div>
 						<div class="tab3">
-
 							<div class="single_page">
 								<h6>Shoe Rock Vision(SRV) Sneakers (Blue)</h6>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie

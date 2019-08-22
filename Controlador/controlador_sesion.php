@@ -14,7 +14,7 @@
 		case 3:
 			break;
 		default:
-			# code...
+			header('location:../index.php');
 			break;
 	}
 
@@ -26,19 +26,22 @@
     	$registro = $reg->validarUsu($nom, $cla);
 
 	    if (empty($registro)){  
-	         header('Location: ../Vista/login.php?valor=Verificar datos');
+	         header('Location: ../Vista/login.php?valor=Verificar&nbspdatos');
 	    }else{
-	        $_SESSION['usuario']= $nom;
 	        foreach ($registro as $dato) {
 	        	$id = $dato['ID_LOG'];
 	        	$rol = $dato['ID_ROL'];
 	        }
-	        switch ($rol) {
+	        $_SESSION['usuario']= $nom;
+	        $_SESSION['id']= $id;
+	        $_SESSION['rol']= $rol;
+
+	        switch ($_SESSION['rol']) {
 	        	case 1:
-	        		header('Location: ../index.php?id='.$id.'&rol='.$rol);
+	        		header('Location: ../index.php');
 	        		break;
 	        	case 2: 
-	        		header('Location: ../index.php?id='.$id.'&rol='.$rol);
+	        		header('Location: ../index.php');
 	        		break;
 	        }        
 	    }	    

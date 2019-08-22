@@ -13,7 +13,15 @@
 		}
 
 		public function listar_calzado(){
-			$sql = $this->db->query("SELECT * FROM calzado");
+			$sql = $this->db->query("CALL LISTARCALZADO");
+			while ($fila = $sql->fetch(PDO::FETCH_ASSOC)) {
+				$this->zapatilla[] = $fila;
+			}
+			return $this->zapatilla;
+		}
+
+		public function listarCalzadoVista(){
+			$sql = $this->db->query("CALL LISTARVISTACALZADO");
 			while ($fila = $sql->fetch(PDO::FETCH_ASSOC)) {
 				$this->zapatilla[] = $fila;
 			}
@@ -21,7 +29,7 @@
 		}
 
 		public function detalles_calzado($id){
-			$sql = $this->db->query('SELECT * FROM CALZADO WHERE COD_SEA = '.$id);
+			$sql = $this->db->query('CALL LISTARCALZADO("'.$id.'")');
 			while ($fila = $sql->fetch(PDO::FETCH_ASSOC)) {
 				$this->zapatilla[] = $fila;
 			}
