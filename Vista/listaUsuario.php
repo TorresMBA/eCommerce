@@ -8,10 +8,11 @@
         		<th>USUARIO</th>
         		<th>NOMBRE</th>
                 <th>APELLIDO</th>
-        		<th>DIRRECION</th>
         		<th>EMAIL</th>
-                <th>CELULAR</th>
+        		<th>CELULAR</th>
+                <th>DIRRECION</th>
                 <th>ACCESO</th>
+                <th>ESTADO</th>
                 <th colspan="2">ACCIONES</th>           
             </tr>
         </thead>
@@ -28,13 +29,17 @@
                         <td class="invert"><?php echo $fila['CELULAR'] ?></td>
                         <td class="invert"><?php echo $fila['DIRRECION'] ?></td>
                         <td class="invert">
-                            <select disabled="">
-                                <option value="1" <?php if ($fila['ID_ROL'] == 1) echo 'selected'?> >Admnistrador</option>
-                                <option value="2" <?php if ($fila['ID_ROL'] == 2) echo 'selected'?> >Cliente</option>
-                            </select>
+                            <?php 
+                                if ($fila['ID_ROL'] == 1) {
+                                   echo "Admintrador";
+                                }else{
+                                    echo "Usuario";
+                                }
+                            ?>                            
                         </td>
-                        <td class="invert"><a href="../Controlador/controlador_usuario.php?op=3&id=<?php echo $fila['ID_LOG'] ?>">Editar</a></td>
-                        <td class="invert"><a href="../Controlador/controlador_usuario.php?op=5&id=<?php echo $fila['ID_LOG'] ?>">Eliminar</a></td>                   
+                         <td class="invert"><?php echo $fila['ESTADO'] ?></td>
+                        <td class="invert"><a href="../Controlador/controlador_usuAdmin.php?op=3&id=<?php echo $fila['ID_LOG'] ?>">Editar</a></td>
+                        <td class="invert"><a href="../Controlador/controlador_usuario.php?op=5&id=<?php echo $fila['ID_LOG'] ?>">Eliminar</a></td>                 
                 </tr>
             <?php 
             }

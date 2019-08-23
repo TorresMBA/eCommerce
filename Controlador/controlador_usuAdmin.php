@@ -1,5 +1,5 @@
 <?php 
-	include_once '../Modelo/modelo_usuarios.php';
+	include_once '../Modelo/modelo_usuAdmin.php';
 
 	$op = $_GET['op'];
 
@@ -15,22 +15,13 @@
 			break;
 		case 4:
 			actulizarUsuario();
-			listarUsuario();
+			header('location:controlador_usuario.php?op=1');
 			break;
-		case 5:
-			eliminarUsuario();
-			listarUsuario();
-			break;
-	}
-
-	function listarUsuario(){
-		$obj = new Usuario();
-		$datos = $obj->listarUsu();
-		include_once '../Vista/listaUsuario.php';
 	}
 
 	function insertarUsuario(){
-		$obj = new Usuario();
+		$obj = new Admin();
+		$id = $_POST['idrol'];
 		$nom = $_POST['Name'];
 		$ape = $_POST['Ape'];
 		$mail = $_POST['Email'];
@@ -38,8 +29,9 @@
 		$dirrecion = $_POST['Dirrecion'];
 		$usu = $_POST['Usuario'];
 		$pass = $_POST['Pass'];
-		//$est = $_POST['est'];
+		$est = $_POST['est'];
 
+		$obj->setId_rol($id);
 		$obj->setNom($nom);
 		$obj->setApe($ape);
 		$obj->setMail($mail);
@@ -47,21 +39,22 @@
 		$obj->setDirrecion($dirrecion);
 		$obj->setUsu($usu);
 		$obj->setPass($pass);
-		$obj->setEst('A');
+		$obj->setEst($est);
 		$obj->insertarUsu();
 		header('location:../index.php');
 	}
 
 	function editarUsuario(){
-		$obj = new Usuario();
+		$obj = new Admin();
 		$id = $_GET['id'];
 
 		$datos = $obj->editarUsu($id);
-		include '../Vista/usuario.php';
+		include '../Vista/usuarioAdmin.php';
 	}
 
 	function actulizarUsuario(){
 		$id = $_POST['id'];
+		$idrol = $_POST['idrol'];
 		$nom = $_POST['Name'];
 		$ape = $_POST['Ape'];
 		$mail = $_POST['Email'];
@@ -69,9 +62,11 @@
 		$dirrecion = $_POST['Dirrecion'];
 		$usu = $_POST['Usuario'];
 		$pass = $_POST['Pass'];
+		$est = $_POST['est'];
 
-		$obj = new Usuario();
+		$obj = new Admin();
 		$obj->setId($id);
+		$obj->setId_rol($idrol);
 		$obj->setNom($nom);
 		$obj->setApe($ape);
 		$obj->setMail($mail);
@@ -79,14 +74,6 @@
 		$obj->setDirrecion($dirrecion);
 		$obj->setUsu($usu);
 		$obj->setPass($pass);
+		$obj->setEst($est);
 		$obj->actualizarUsu();
 	}
-
-	function eliminarUsuario(){		
-		$id = $_GET['id'];
-
-		$obj = new Usuario();
-		$obj->setId($id);
-		$obj->eliminarUsu();
-	}
-?>

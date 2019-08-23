@@ -54,6 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<?php 
 								if (isset($_SESSION['usuario']) && $_SESSION['rol'] == 1) {									
 									echo '<li><a href="../Controlador/controlador_usuario.php?op=1">Listar Usuarios</a></li>';
+									echo '<li><a href="../Vista/ingresarUsuAdmin.php">Ingresar Usuarios</a></li>';
 									echo '<li><a href="../Controlador/controlador_producto.php?op=2">Ingresar Productos</a></li>';
 									echo '<li><a href="../Controlador/controlador_usuario.php?op=3&id='.$_SESSION['id'].'">'.$_SESSION['usuario'].'</a></li>';
 									echo '<li><a href="../Controlador/controlador_sesion.php?op=2">Cerrar Sesion</a></li>';

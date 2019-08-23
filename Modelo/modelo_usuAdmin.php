@@ -1,6 +1,7 @@
 <?php 
-	class Usuario{
+	class Admin{
 		private $id;
+		private $id_rol;
 		private $nom;
 		private $ape; 
 		private $mail;
@@ -17,6 +18,10 @@
 			include_once 'Conexion.php';
 			$this->db = Conexion::conectar();
 			$this->lista = array();
+		}
+
+		public function getId_rol(){
+			return $this->id_rol;
 		}
 
 		public function getId(){
@@ -91,25 +96,22 @@
 			$this->est= $est;
 		}
 
-		public function listarUsu(){
-			$sql = $this->db->query("CALL LISTARUSUARIO");
-			while ($fila = $sql->fetch(PDO::FETCH_ASSOC)) {
-				$this->lista[] = $fila;
-			}
-			return $this->lista;
+		public function setId_rol($id_rol){
+			$this->id_rol = $id_rol;
 		}
 
 		public function insertarUsu(){
-			$sql = "CALL INSERTARUSUARIOS (?,?,?,?,?,?,?,?)";
+			$sql = "CALL INSERTARUSUADMIN (?,?,?,?,?,?,?,?,?)";
 			$dato = $this->db->prepare($sql);
-			$dato->bindParam(1, $this->nom);
-			$dato->bindParam(2, $this->ape);
-			$dato->bindParam(3, $this->mail);
-			$dato->bindParam(4, $this->cel);
-			$dato->bindParam(5, $this->dirrecion);
-			$dato->bindParam(6, $this->usu);
-			$dato->bindParam(7, $this->pass);
-			$dato->bindParam(8, $this->est);
+			$dato->bindParam(1, $this->id_rol);
+			$dato->bindParam(2, $this->nom);
+			$dato->bindParam(3, $this->ape);
+			$dato->bindParam(4, $this->mail);
+			$dato->bindParam(5, $this->cel);
+			$dato->bindParam(6, $this->dirrecion);
+			$dato->bindParam(7, $this->usu);
+			$dato->bindParam(8, $this->pass);
+			$dato->bindParam(9, $this->est);
 			$dato->execute();
 		}
 
@@ -123,33 +125,19 @@
 		}
 
 		public function actualizarUsu(){
-	        $sql = "CALL ACTUALIZARUSUARIO(?,?,?,?,?,?,?,?)";
+	        $sql = "CALL ACTUALIZARUSUARIOADMIN(?,?,?,?,?,?,?,?,?,?)";
 	        $dato = $this->db->prepare($sql);
 	        $dato->bindParam(1, $this->id);
-	        $dato->bindParam(2, $this->nom);
-			$dato->bindParam(3, $this->ape);
-			$dato->bindParam(4, $this->mail);
-			$dato->bindParam(5, $this->cel);
-			$dato->bindParam(6, $this->dirrecion);
-			$dato->bindParam(7, $this->usu);
-			$dato->bindParam(8, $this->pass);
+	        $dato->bindParam(2, $this->id_rol);
+	        $dato->bindParam(3, $this->nom);
+			$dato->bindParam(4, $this->ape);
+			$dato->bindParam(5, $this->mail);
+			$dato->bindParam(6, $this->cel);
+			$dato->bindParam(7, $this->dirrecion);
+			$dato->bindParam(8, $this->usu);
+			$dato->bindParam(9, $this->pass);
+			$dato->bindParam(10, $this->est);
 	        $dato->execute();
 	    }    
-
-		public function validarUsu($nom, $cla){
-	        $sql = "CALL VALIDARLOGIN('".$nom."','".$cla."')";        
-	        $login = $this->db->query($sql);
-	        while ($fila = $login->fetch(PDO::FETCH_ASSOC)){
-	            $this->lista[] =  $fila;
-	        }
-	        return $this->lista;
-    	}
-
-    	public function eliminarUsu(){
-    		$sql = "CALL ELIMINARUSUARIO (?)";
-            $sentencia = $this->db->prepare($sql);                
-            $sentencia->bindParam(1, $this->id);
-            $sentencia->execute();
-    	}
-	}
+	}	
 ?>
