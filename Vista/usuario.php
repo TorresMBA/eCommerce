@@ -16,7 +16,7 @@
 					<h6>Usuario: <?php echo $fila['NOM_USU'] ?></h6>
 					<form action="../Controlador/controlador_usuario.php?op=4" method="post">
 						<div class="col-md-6 col-sm-6 contact_left_grid">
-							<input type="text" name="id" placeholder="ID" required="" value="<?php echo $fila['ID_LOG'] ?>">
+							<input type="text" name="id" placeholder="ID" required="" value="<?php echo $fila['ID_LOG'] ?>" readonly>
 							<input type="text" name="Name" placeholder="Nombre" required="" value="<?php echo $fila['NOMBRE'] ?>"><br><br>
 							<input type="text" name="Ape" placeholder="Apellido" required="" value="<?php echo $fila['APELLIDO'] ?>">
 							<input type="email" name="Email" placeholder="Email" required="" value="<?php echo $fila['EMAIL'] ?>"><br><br>

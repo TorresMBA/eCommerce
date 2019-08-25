@@ -160,17 +160,26 @@
 							</div>
 						</div>
 						<div class="tab3">
-							<div class="single_page">
-								<h6>Shoe Rock Vision(SRV) Sneakers (Blue)</h6>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
-									blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
-									ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
-									magna aliqua.</p>
-								<p class="para">Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
-									blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
-									ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
-									magna aliqua.</p>
-							</div>
+						<div class="container">
+                            <table class="table table-striped">
+									<tr>
+										<td>MARCA </td>
+										<td><?php echo $fila['NOM_MARCA'] ?></td>                                                                   
+									</tr>
+									<tr>
+										<td>TIPO </td>
+										<td><?php echo $fila['NOM_TIPO'] ?></td>                                                                   
+									</tr>
+									<tr>
+										<td>GENERO </td>
+										<td><?php echo $fila['TIPO_GEN'] ?></td>                                                                   
+									</tr>
+									<tr>
+                                    	<td>MATERIAL </td>
+                                        <td><?php echo $fila['MATERIAL'] ?></td>                                                                   
+                                    </tr>
+                                </table>
+                            </div>
 						</div>
 					</div>
 				</div>
