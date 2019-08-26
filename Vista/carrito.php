@@ -1,95 +1,113 @@
 <?php
 	include 'header.php';
+
+	if (isset($_SESSION['carrito'])) {
+		if(isset($_GET['id'])){
+			$arreglo  = $_SESSION['carrito'];
+			$encontro = false;
+			$numero = 0;
+			for($i = 0; $i < count($arreglo); $i++){
+				if($arreglo[$i]['Id'] == $_GET['id']){
+					$encontro = true;
+					$numero = $i;
+				}
+			}
+			if($encontro){
+				$arreglo[$numero]['Cantidad'] = $arreglo[$numero]['Cantidad']+1;
+				$_SESSION['carrito'] = $arreglo;
+			}else{
+				foreach($datos as $fila){
+					$id = $fila['COD_SEA'];
+					$imagen = $fila['FOTO1'];
+					$nom= $fila['NOMBRE'];
+					$precio = $fila['PRECIO_OFERTA'];	
+				}
+				$nuevos = array('Id' => $id,
+									'Imagen' => $imagen,
+									'Cantidad' => 1,
+									'Nom' => $nom,
+									'Precio' => $precio);
+				array_push($arreglo, $nuevos);
+				$_SESSION['carrito'] = $arreglo;
+			}
+		}
+	}else{
+		if(isset($_GET['id'])){
+			foreach($datos as $fila){
+				$id = $fila['COD_SEA'];
+				$imagen = $fila['FOTO1'];
+				$nom= $fila['NOMBRE'];
+				$precio = $fila['PRECIO_OFERTA'];	
+			}
+			$arreglo[] = array('Id' => $id,
+								'Imagen' => $imagen,
+								'Cantidad' => 1,
+								'Nom' => $nom,
+								'Precio' => $precio);
+			$_SESSION['carrito'] = $arreglo;
+		}
+	}
 ?>
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
 			<div class="privacy about">
-				<h3>Chec<span>kout</span></h3>
-
-				<div class="checkout-right">
-					<h4>Your shopping cart contains: <span>3 Products</span></h4>
+				<h3>Carrito:</h3>
+				<div class="checkout-right">						
 					<table class="timetable_sub">
 						<thead>
 							<tr>
-								<th>SL No.</th>
-								<th>Product</th>
-								<th>Quality</th>
-								<th>Product Name</th>
-
-								<th>Price</th>
-								<th>Remove</th>
+								<th>ID</th>
+								<th>PRODUCTO</th>
+								<th>CANTIDAD</th>
+								<th>MARCA</th>
+								<th>PRECIO</th>
+								<th>QUITAR</th>
 							</tr>
 						</thead>
 						<tbody>
+						<!-- <h4>Tu carrito de compras contiene: <span><?php #echo count($dato) ?></span></h4>--><br>
+						<?php 
+							if(!isset($_SESSION['usuario'])){
+								echo '<script>alert("Debes loguearte primero")</script>';
+								echo '<script>window.location="../Vista/login.php"</script>';
+							}else{
+								if(isset($_SESSION['carrito'])){
+									$dato = $_SESSION['carrito'];
+									$total=0;
+									for($i = 0; $i < count($dato); $i++){	
+													
+						?>
 							<tr class="rem1">
-								<td class="invert">1</td>
-								<td class="invert-image"><a href="single.html"><img src="../images/s1.jpg" alt=" " class="img-responsive"></a></td>
+								<td class="invert"><?php echo $dato[$i]['Id'] ?></td>
+								<td class="invert-image"><a href="single.html"><img src="../images/img/<?php echo $dato[$i]['Imagen'] ?>" class="img-responsive"></a></td>
 								<td class="invert">
 									<div class="quantity">
 										<div class="quantity-select">
 											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value"><span>1</span></div>
+											<div class="entry value"><span><?php echo $dato[$i]['Cantidad'] ?></span></div>
 											<div class="entry value-plus active">&nbsp;</div>
 										</div>
 									</div>
 								</td>
-								<td class="invert">Bella Toes</td>
+								<td class="invert"><?php echo $dato[$i]['Nom'] ?></td>
 
-								<td class="invert">$675.00</td>
+								<td class="invert"><?php echo $dato[$i]['Precio'] ?></td>
 								<td class="invert">
 									<div class="rem">
 										<div class="close1"> </div>
 									</div>
-
 								</td>
-							</tr>
-							<tr class="rem2">
-								<td class="invert">2</td>
-								<td class="invert-image"><a href="single.html"><img src="../images/s5.jpg" alt=" " class="img-responsive"></a></td>
-								<td class="invert">
-									<div class="quantity">
-										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value"><span>1</span></div>
-											<div class="entry value-plus active">&nbsp;</div>
-										</div>
-									</div>
-								</td>
-								<td class="invert">Red Bellies</td>
-
-								<td class="invert">$325.00</td>
-								<td class="invert">
-									<div class="rem">
-										<div class="close2"> </div>
-									</div>
-
-								</td>
-							</tr>
-							<tr class="rem3">
-								<td class="invert">3</td>
-								<td class="invert-image"><a href="single.html"><img src="../images/s2.jpg" alt=" " class="img-responsive"></a></td>
-								<td class="invert">
-									<div class="quantity">
-										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value"><span>1</span></div>
-											<div class="entry value-plus active">&nbsp;</div>
-										</div>
-									</div>
-								</td>
-								<td class="invert">Chikku Loafers</td>
-
-								<td class="invert">$405.00</td>
-								<td class="invert">
-									<div class="rem">
-										<div class="close3"> </div>
-									</div>
-
-								</td>
-							</tr>
-
+							</tr>	
+							<?php 	
+									}
+								}else{
+									echo '<h4>Tu carrito esta vacio</h4>';
+								}
+							}
+							?>		
 						</tbody>
 					</table>
+					
 				</div>
 				<div class="checkout-left">
 					<div class="col-md-4 checkout-left-basket">
@@ -134,11 +152,10 @@
 										<div class="controls">
 											<label class="control-label">Address type: </label>
 											<select class="form-control option-w3ls">
-																							<option>Office</option>
-																							<option>Home</option>
-																							<option>Commercial</option>
-							
-																					</select>
+												<option>Office</option>
+												<option>Home</option>
+												<option>Commercial</option>
+											</select>
 										</div>
 									</div>
 									<button class="submit check_out">Delivery to this Address</button>
@@ -149,14 +166,12 @@
 							<a href="payment.html">Make a Payment </a>
 						</div>
 					</div>
-
+				
 					<div class="clearfix"> </div>
-
-
-					<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>
+	</div>
 <?php
 	include 'footer.php';
 ?>

@@ -1,6 +1,8 @@
 <?php
-	if (!isset($_SESSION['usuario'])){
-	include 'header.php';
+	if (isset($_SESSION['usuario'])){
+		header('location:../index.php');
+	}
+	include_once 'header.php';
 ?>
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
@@ -30,8 +32,5 @@
 		</div>
 	</div>
 <?php 
-	include 'footer.php';
-	}else{
-		header('location:../index.php');
-	}
+	include_once 'footer.php';
 ?>

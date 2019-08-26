@@ -15,7 +15,7 @@
 			break;
 		case 4:
 			actulizarUsuario();
-			listarUsuario();
+			
 			break;
 		case 5:
 			eliminarUsuario();
@@ -49,7 +49,8 @@
 		$obj->setPass($pass);
 		$obj->setEst('A');
 		$obj->insertarUsu();
-		header('location:../index.php');
+		echo '<script>alert("Usuario Ingresado Correctamente")</script>';
+		echo '<script>window.location="../index.php"</script>';
 	}
 
 	function editarUsuario(){
@@ -80,6 +81,9 @@
 		$obj->setUsu($usu);
 		$obj->setPass($pass);
 		$obj->actualizarUsu();
+
+		echo '<script>alert("Modificado Correctamente")</script>';
+		echo '<script>window.location="Controlador/controlador_usuario.php?op=3"</script>';
 	}
 
 	function eliminarUsuario(){		

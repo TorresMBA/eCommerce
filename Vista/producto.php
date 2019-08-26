@@ -71,13 +71,8 @@
 				</div>
 				<div class="occasion-cart">
 					<div class="shoe single-item single_page_b">
-						<form action="#" method="post">
-							<input type="hidden" name="cmd" value="_cart">
-							<input type="hidden" name="add" value="1">
-							<input type="hidden" name="shoe_item" value="Chikku Loafers">
-							<input type="hidden" name="amount" value="405.00">
-							<input type="submit" name="submit" value="Agregar al Carrito" class="button add">
-							<a href="#" data-toggle="modal" data-target="#myModal1"></a>
+						<form action="../Controlador/controlador_carrito.php?op=1&id=<?php echo $fila['COD_SEA'] ?>" method="POST">						
+							<input type="submit" name="submit" value="Agregar al Carrito" class="button add">						
 						</form>
 					</div>
 				</div>
