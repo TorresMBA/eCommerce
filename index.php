@@ -92,12 +92,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<div id="cd-search" class="cd-search">
 						<form action="#" method="post">
-							<input name="Search" type="search" placeholder="Click enter after typing...">
+							<input name="Search" type="search" placeholder="Haga clic en Enter después de escribir...">
 						</form>
 					</div>
 				</div>
 				<!-- search -->
-
 				<div class="clearfix"></div>
 			</div>
 			<!-- slider -->
@@ -145,7 +144,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="clearfix"> </div>
 			</div>
-			<!-- //slider -->
 			<ul class="top_icons">
 				<li><a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a></li>
 				<li><a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a></li>
@@ -155,8 +153,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</ul>
 		</div>
 	</div>
-	<!-- //banner -->
-	<!-- /girds_bottom-->
 	<div class="grids_bottom">
 		<div class="style-grids">
 			<div class="col-md-6 style-grid style-grid-1">
@@ -327,12 +323,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- /newsletter-->
 	<div class="newsletter_w3layouts_agile">
 		<div class="col-sm-6 newsleft">
-			<h3>Sign up for Newsletter !</h3>
+			<h3>¡Suscríbete al boletín!</h3>
 		</div>
 		<div class="col-sm-6 newsright">
 			<form action="#" method="post">
-				<input type="email" placeholder="Enter your email..." name="email" required="">
-				<input type="submit" value="Submit">
+				<input type="email" placeholder="Introduce tu correo electrónico..." name="email" required="">
+				<input type="submit" value="Enviar">
 			</form>
 		</div>
 
@@ -374,25 +370,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="col-md-9 footer-right">
 				<div class="sign-grds">
 					<div class="col-md-4 sign-gd">
-						<h4>Our <span>Information</span> </h4>
+						<h4>Our <span>Informacion</span> </h4>
 						<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="index.html">Inicio</a></li>
 							<li><a href="about.html">About</a></li>
-							<li><a href="404.html">Services</a></li>
+							<li><a href="404.html">Servicios</a></li>
 							<li><a href="404.html">Short Codes</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="contact.html">Contacto</a></li>
 						</ul>
 					</div>
 
 					<div class="col-md-5 sign-gd-two">
-						<h4>Store <span>Information</span></h4>
+						<h4>Store <span>Información</span></h4>
 						<div class="address">
 							<div class="address-grid">
 								<div class="address-left">
 									<i class="fa fa-phone" aria-hidden="true"></i>
 								</div>
 								<div class="address-right">
-									<h6>Phone Number</h6>
+									<h6>Numero de Telefono</h6>
 									<p>+1 234 567 8901</p>
 								</div>
 								<div class="clearfix"> </div>
@@ -402,8 +398,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<i class="fa fa-envelope" aria-hidden="true"></i>
 								</div>
 								<div class="address-right">
-									<h6>Email Address</h6>
-									<p>Email :<a href="mailto:example@email.com"> mail@example.com</a></p>
+									<h6>Email:</h6>
+									<p>Email :<a href="mailto:example@email.com">calzado@gmail.com</a></p>
 								</div>
 								<div class="clearfix"> </div>
 							</div>
@@ -412,9 +408,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<i class="fa fa-map-marker" aria-hidden="true"></i>
 								</div>
 								<div class="address-right">
-									<h6>Location</h6>
-									<p>Broome St, NY 10002,California, USA.
-
+									<h6>Localizacion</h6>
+									<p>
+										Broome St, NY 10002,California, USA.
 									</p>
 								</div>
 								<div class="clearfix"> </div>
@@ -445,6 +441,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<!-- //footer -->
     <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+    
 	<!-- js -->
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<!-- //js -->

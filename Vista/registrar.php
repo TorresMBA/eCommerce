@@ -1,5 +1,7 @@
 <?php 
 	include 'header.php';
+
+	if (!isset($_SESSION['usuario'])){
 ?>
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
@@ -32,5 +34,9 @@
 		</div>
 	</div>
 <?php 
+	}else{
+		echo '<script>alert("Ya estas Registrado, Sal de tu cuenta y Intenta de  nuevo")</script>';
+		echo '<script>window.location="../index.php"</script>';
+	}
 	include 'footer.php';
 ?>

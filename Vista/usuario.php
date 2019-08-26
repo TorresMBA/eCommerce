@@ -1,8 +1,6 @@
 <?php 
 	include 'header.php'; 
-	 if (!isset($_SESSION['usuario'])){
-        header('Location: login.php');
-    }
+	if (isset($_SESSION['usuario'])){
 ?>
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
@@ -40,4 +38,10 @@
 			<div class="clearfix"></div>
 		</div>
 	</div>
-<?php include 'footer.php'; ?>
+<?php 
+	}else{
+		echo '<script>alert("Debes Loguearte primero")</script>';
+		include_once '404.php';
+	}
+	include 'footer.php'; 
+?>

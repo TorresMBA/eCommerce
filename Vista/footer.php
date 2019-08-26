@@ -92,7 +92,6 @@
 		<div class="clearfix"> </div>
 	</div>
 	<!--//banner -->
-
 	<!-- /newsletter-->
 	<div class="newsletter_w3layouts_agile">
 		<div class="col-sm-6 newsleft">

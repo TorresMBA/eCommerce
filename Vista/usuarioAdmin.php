@@ -1,4 +1,11 @@
-<?php include_once 'header.php'; ?>
+<?php 
+	include_once 'header.php'; 
+
+	if (!isset($_SESSION['usuario'])) {
+		echo '<script>alert("Debes Loguearte como administrador")</script>';
+		echo '<script>window.location="../Vista/login.php"</script>';
+	}else if (isset($_SESSION['usuario']) && $_SESSION['rol'] == 1){
+?>
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
 			<h3 class="head">Perfil</h3>
@@ -46,4 +53,10 @@
 			<div class="clearfix"></div>
 		</div>
 	</div>
-<?php include_once 'footer.php'; ?>
+<?php 
+	}else{
+		include_once '404.php';
+	}
+
+	include_once 'footer.php'; 
+?>

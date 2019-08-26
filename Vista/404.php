@@ -1,11 +1,9 @@
-<?php
-	include 'header.php';
-?>
 		<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
 			<div class="error_page">
 				<h4>404</h4>
-				<p>This link dead link</p>
+				<h5><?php if (isset($_GET['msj'])) echo $_GET['msj'];?></h5>
+				<p>No puedes Acceder a esta Pagina</p>
 				<form action="#" method="post">
 					<input class="serch" type="search" name="serch" placeholder="Search here" required="">
 					<button class="btn1"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -32,10 +30,7 @@
 					</li>
 
 				</ul>
-				<a class="b-home" href="index.html">Back to Home</a>
+				<a class="b-home" href="../index.php">Regresar al Inicio</a>
 			</div>
 		</div>
 	</div>
-<?php
-	include 'footer.php';
-?>

@@ -83,9 +83,12 @@
 								<td class="invert">
 									<div class="quantity">
 										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value"><span><?php echo $dato[$i]['Cantidad'] ?></span></div>
-											<div class="entry value-plus active">&nbsp;</div>
+											<!--<div class="entry value-minus">&nbsp;</div>-->
+											<div class="entry value"><span><input type="text" value="<?php echo $dato[$i]['Cantidad'] ?>" 
+													data-precio="<?php echo $dato[$i]['Precio'] ?>"
+													data-id="<?php echo $dato[$i]['Id'] ?>"
+													class="cantidad"></span></div>
+											<!--<div class="entry value-plus active">&nbsp;</div>-->
 										</div>
 									</div>
 								</td>
@@ -99,6 +102,7 @@
 								</td>
 							</tr>	
 							<?php 	
+										$total = ($dato[$i]['Cantidad'] *  $dato[$i]['Precio']) + $total;
 									}
 								}else{
 									echo '<h4>Tu carrito esta vacio</h4>';
@@ -111,13 +115,12 @@
 				</div>
 				<div class="checkout-left">
 					<div class="col-md-4 checkout-left-basket">
-						<h4>Continue to basket</h4>
+						<h4>Detalles de Compra</h4>
 						<ul>
-							<li>Product1 <i>-</i> <span>$675.00 </span></li>
-							<li>Product2 <i>-</i> <span>$325.00 </span></li>
-							<li>Product3 <i>-</i> <span>$405.00 </span></li>
-							<li>Total Service Charges <i>-</i> <span>$55.00</span></li>
-							<li>Total <i>-</i> <span>$1405.00</span></li>
+							<?php for($i = 0; $i < count($dato); $i++) { ?>
+							<li><?php echo $dato[$i]['Nom'] ?>&nbsp;Cantidad:<?php echo $dato[$i]['Cantidad'] ?><span>S/<?php echo $dato[$i]['Precio'] ?></span></li>
+							<?php } ?>
+							<li>SubTotal: <span id="total">S/<?php echo $total; ?></span></li>
 						</ul>
 					</div>
 					<div class="col-md-8 address_form">

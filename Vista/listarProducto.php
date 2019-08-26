@@ -1,4 +1,11 @@
-<?php include_once 'header.php'; ?>
+<?php 
+    include_once 'header.php'; 
+
+    if (!isset($_SESSION['usuario'])) {
+        echo '<script>alert("Debes Loguearte como administrador")</script>';
+        echo '<script>window.location="../Vista/login.php"</script>';
+    }else if (isset($_SESSION['usuario']) && $_SESSION['rol'] == 1){
+?>
 <div class="shop_inner_inf">
     <div class="checkout-right">
 					<h4>Your shopping cart contains: <span>3 Products</span></h4>
@@ -49,4 +56,10 @@
 					</table>
                 </div>
     </div>
-<?php include_once 'footer.php'; ?>
+<?php 
+    }else{
+        include_once '404.php';
+    }
+
+    include_once 'footer.php'; 
+?>

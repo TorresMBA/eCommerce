@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>Downy Shoes an Ecommerce Category Bootstrap Responsive Website Template | Shop :: w3layouts</title>
+	<title>Downy Shoes an Ecommerce Category Bootstrap Responsive Website Template</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Downy Shoes Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -17,6 +17,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		function hideURLbar() {
 			window.scrollTo(0, 1);
 		}
+
+		function nuevo(){
+                location.href="../Vista/ingresarUsuAdmin.php";
+        }
 	</script>
 	<!-- //custom-theme -->
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -30,6 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link rel="stylesheet" href="../css/shop.css" type="text/css" media="screen" property="" />
 	<link rel="stylesheet" href="../css/about.css" type="text/css" media="screen" property="" />
 	<link href="../css/font-awesome.css" rel="stylesheet">
+	<script type="text/javascript" src="../js/carrito.js"></script>
 	<!-- //font-awesome-icons -->
 	<link href="//fonts.googleapis.com/css?family=Montserrat:100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
 	    rel="stylesheet">
@@ -99,7 +104,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div id="cd-search" class="cd-search">
 				<form action="#" method="post">
-					<input name="Search" type="search" placeholder="Click enter after typing...">
+					<input name="Search" type="search" placeholder="Haga clic en Enter después de escribir ...">
 				</form>
 			</div>
 		</div>
@@ -108,12 +113,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<!-- /banner_inner -->
 		<div class="services-breadcrumb_w3ls_agileinfo">
 			<div class="inner_breadcrumb_agileits_w3">
-
 				<ul class="short">
-					<li><a href="../index.php">Home</a><i>|</i></li>
+					<li><a href="../index.php">Inicio</a><i>|</i></li>
 					<!--<li>Shop</li>-->
 				</ul>
 			</div>
 		</div>
-		<!-- //banner_inner -->
 	</div>

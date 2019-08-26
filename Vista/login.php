@@ -1,9 +1,9 @@
-<?php
-	if (isset($_SESSION['usuario'])){
-		header('location:../index.php');
-	}
+<?php	
 	include_once 'header.php';
-?>
+?>	
+	<?php 
+	if (!isset($_SESSION['usuario'])) {
+	?>
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
 			<h3 class="head">Login</h3>
@@ -31,6 +31,11 @@
 			<div class="clearfix"></div>
 		</div>
 	</div>
+	<?php
+		}else{
+			include_once '404.php';
+		}
+	?>
 <?php 
 	include_once 'footer.php';
 ?>
