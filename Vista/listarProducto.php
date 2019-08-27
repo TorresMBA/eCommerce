@@ -8,7 +8,7 @@
 ?>
 <div class="shop_inner_inf">
     <div class="checkout-right">
-					<h4>Your shopping cart contains: <span>3 Products</span></h4>
+					<h4>Productos:</h4>
 					<table class="timetable_sub">
 						<thead>
 							<tr>

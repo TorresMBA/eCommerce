@@ -1,43 +1,71 @@
 <?php 
 	include 'header.php'; 
-	if (isset($_SESSION['usuario'])){
+	if (!isset($_SESSION['usuario'])) {
+		echo '<script>alert("Debes Loguearte como administrador")</script>';
+		echo '<script>window.location="../Vista/login.php"</script>';
+	}else if (isset($_SESSION['usuario']) && $_SESSION['rol'] == 1){
 ?>
-	<div class="ads-grid_shop">
-		<div class="shop_inner_inf">
-			<h3 class="head">Perfil</h3>
-			<p class="head_para">Add Some Description</p>
-			<div class="inner_section_w3ls">
-				<div class="col-md-7 contact_grid_right">
-					<?php
+	<div class="container" style="width: 50%"> 	
+		<br><br>
+		<h3 class="head">Perfil</h3>
+		<p class="head_para">Modifique sus Datos</p>
+		<br><br>
+		<?php
 						foreach ($datos as $fila) {				
-					?>
-					<h6>Usuario: <?php echo $fila['NOM_USU'] ?></h6>
-					<form action="../Controlador/controlador_usuario.php?op=4" method="post">
-						<div class="col-md-6 col-sm-6 contact_left_grid">
-							<input type="text" name="id" placeholder="ID" required="" value="<?php echo $fila['ID_LOG'] ?>" readonly>
-							<input type="text" name="Name" placeholder="Nombre" required="" value="<?php echo $fila['NOMBRE'] ?>"><br><br>
-							<input type="text" name="Ape" placeholder="Apellido" required="" value="<?php echo $fila['APELLIDO'] ?>">
-							<input type="email" name="Email" placeholder="Email" required="" value="<?php echo $fila['EMAIL'] ?>"><br><br>
-						</div>
-						<div class="col-md-6 col-sm-6 contact_left_grid">
-							<input type="text" name="Telephone" placeholder="Celular" required="" value="<?php echo $fila['CELULAR'] ?>">
-							<input type="text" name="Dirrecion" placeholder="Dirrecion" required="" value="<?php echo $fila['DIRRECION'] ?>"><br><br>
-							<input type="text" name="Usuario" placeholder="Usuario" required="" value="<?php echo $fila['NOM_USU'] ?>"><br><br>
-							<input type="text" name="Pass" placeholder="Contraseña" required="" value="<?php echo $fila['PASS'] ?>"><br><br>
-						</div>
-						<div class="clearfix">  </div>
-						<br>
-						<input type="submit" value="Actualizar">
-					</form>
-					<?php 
-					}
-					?>
-				</div>	
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"></div>
+		?>
+		<div class=" contact_grid_right">
+			<h6>Usuario: <?php echo $fila['NOM_USU'] ?></h6>
 		</div>
+		<form action="../Controlador/controlador_usuario.php?op=2" method="post" class="creditly-card-form agileinfo_form">
+			<section class="creditly-wrapper wthree, w3_agileits_wrapper">
+				<div class="credit-card-wrapper">
+						<div class="first-row form-group">
+							<div class="controls">
+								<label class="control-label">ID</label>
+								<input class="form-control" type="text" name="id" value="<?php echo $fila['ID_LOG'] ?>" readonly>
+							</div>
+							<div class="controls">
+								<label class="control-label">Nombre de Usuario</label>
+								<input class=" form-control" type="text" name="Usuario" value="<?php echo $fila['NOM_USU'] ?>">
+							</div>
+							<div class="controls">
+								<label class="control-label">Contraseña</label>
+								<input class=" form-control" type="password" name="Pass" value="<?php echo $fila['PASS'] ?>">
+							</div>
+							<div class="controls">
+								<label class="control-label">Nombre</label>
+								<input class="form-control" type="text" name="Name" value="<?php echo $fila['NOMBRE'] ?>">
+							</div>
+							<div class="w3_agileits_card_number_grid_left">
+								<div class="controls">
+									<label class="control-label">Apellido</label>
+									<input class="number form-control" type="text" name="Ape" value="<?php echo $fila['APELLIDO'] ?>" >
+								</div>
+							</div>
+							<div class="w3_agileits_card_number_grid_right">
+								<div class="controls">
+									<label class="control-label">Email:</label>
+									<input class=" form-control" type="text" name="Email" value="<?php echo $fila['EMAIL'] ?>">
+								</div>
+							</div>						
+							<div class="controls">
+								<label class="control-label">Celular</label>
+								<input class=" form-control" type="text" name="Telephone" value="<?php echo $fila['CELULAR'] ?>">
+							</div>
+							<div class="controls">
+								<label class="control-label">Dirrecion</label>
+								<input class=" form-control" type="text" name="Dirrecion" value="<?php echo $fila['DIRRECION'] ?>">
+							</div>
+						</div>
+						<button type="submit" class="btn btn-danger" style="width: 50%">Actualizar</button>
+				</div>
+			</section>
+		</form>
+		<?php 
+					}
+		?>
 	</div>
+	<br>
 <?php 
 	}else{
 		echo '<script>alert("Debes Loguearte primero")</script>';

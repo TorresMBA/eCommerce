@@ -8,14 +8,13 @@
 			listarUsuario();
 			break;
 		case 2:
-			insertarUsuario();			
+			insertarUsuario();		
 			break;
 		case 3:
 			editarUsuario();
 			break;
 		case 4:
-			actulizarUsuario();
-			header('location:controlador_usuario.php?op=1');
+			actulizarUsuario();		
 			break;
 	}
 
@@ -41,7 +40,8 @@
 		$obj->setPass($pass);
 		$obj->setEst($est);
 		$obj->insertarUsu();
-		header('location:../index.php');
+		echo '<script>alert("Usuario Registrado Correctamente")</script>';
+		echo '<script>window.location="../Controlador/controlador_usuario.php?op=1"</script>';
 	}
 
 	function editarUsuario(){
@@ -76,4 +76,6 @@
 		$obj->setPass($pass);
 		$obj->setEst($est);
 		$obj->actualizarUsu();
+		echo '<script>alert("Modificado Correctamente")</script>';
+		echo '<script>window.location="controlador_usuario.php?op=1"</script>';
 	}

@@ -6,99 +6,86 @@
 		echo '<script>window.location="../Vista/login.php"</script>';
 	}else if (isset($_SESSION['usuario']) && $_SESSION['rol'] == 1){
 ?>
-	<div class="ads-grid_shop">
-		<div class="shop_inner_inf">
-			<h3 class="head">Ingresar Productos</h3>
-			<p class="head_para">Agregar todos los campos</p>
-			<div class="inner_section_w3ls" >
-				<div class="col-md-7 contact_grid_right ">
-					<h6>Rellene todo los campos del producto</h6>
-					<form action="../Controlador/controlador_producto.php?op=2" method="post">
-						<div class="col-md-6 col-sm-6 contact_left_grid">				
-							<table class="table table-hover ">
-								<tr>
-									<td>Nombre</td>
-									<td><input type="text" name="Name"  required=""></td>
-								</tr>
-								<tr>
-									<td>Marca</td>
-									<td>
-										<select class="form-control" name="marca">
-											<?php 
-												include_once '../Controlador/controlador_Lista.php'; 
-												listarMarca();
-											?>
-										</select>
-									</td>
-									<td>
-										<a href="">Ingresar Nueva Marca</a>
-										<a href="IngresarDetalles.php" target="_blank" onClick="window.open(this.href, this.target, 'width=500,height=500'); return false;">Click aquí</a>
-									</td>
-								</tr>
-								<tr>
-									<td>Precio Normal</td>
-									<td><input type="text" name="precioN"  required=""></td>
-								</tr>
-								<tr>
-									<td>Precio De Oferta</td>
-									<td><input type="text" name="precioO"  required=""></td>
-								</tr>
-								<tr>
-									<td>Descripcion</td>
-									<td>
-										<textarea class="form-control" name="desc" rows="5"></textarea>
-									</td>
-								</tr>
-								<tr>
-									<td>Talla</td>
-									<td>
-										<select class="form-control" name="talla">
-											<?php 
-												include_once '../Controlador/controlador_Lista.php'; 
-												listarTalla();
-											?>
-										</select>
-									</td>
-									<td><a href="">Ingresar Nueva Talla</a></td>
-								</tr>
-								<tr>
-									<td>Tipo</td>
-									<td>
-										<select class="form-control" name="tipo">
-											<?php 
-												include_once '../Controlador/controlador_Lista.php'; 
-												listarTipo();
-											?>
-										</select>
-									</td>
-									<td><a href="">Ingresar Nuevo Tipo</a></td>
-								</tr>
-								<tr>
-									<td>Genero</td>
-									<td>
-										<select class="form-control" name="genero">
-											<?php 
-												include_once '../Controlador/controlador_Lista.php'; 
-												listarGenero();
-											?>
-										</select>
-									</td>
-									<td><a href="">Ingresar Nueva Marca</a></td>
-								</tr>
-								<tr>
-									<td>Material</td>
-									<td><input type="text" name="material"  required=""></td>
-								</tr>
-							</table><br>
-							<input type="submit" value="Registrar">		
-						</div>					
-					</form>
-				</div>	
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"></div>
+	<div class="container" style="width: 50%"> 	
+		<br><br>
+		<h3 class="head">Registro de Prodcutos</h3>
+		<p class="head_para">Acceso solo para Administradores</p>
+		<br><br>
+		<div class=" contact_grid_right">
+			<h6>Registrar Producto: </h6>
 		</div>
+		<form action="../Controlador/controlador_producto.php?op=2" method="post" class="creditly-card-form agileinfo_form">
+			<section class="creditly-wrapper wthree, w3_agileits_wrapper">
+				<div class="credit-card-wrapper">
+						<div class="contact_left_grid">						
+							<div class="controls">
+								<label class="control-label">Nombre del Producto</label>
+								<input class=" form-control" type="text" name="Name">
+							</div>
+							<div class="controls">
+								<label class="control-label">Marca:</label>
+								<select class="form-control option-w3ls" name="marca" style="padding: 1%;">
+									<?php 
+										include_once '../Controlador/controlador_Lista.php'; 
+										listarMarca();
+									?>
+								</select>
+							</div>
+							<div class="controls">
+								<label class="control-label">Precio Normal</label>
+								<input class="form-control" type="text" name="precioN">
+							</div>
+							<div class="w3_agileits_card_number_grid_left">
+								<div class="controls">
+									<label class="control-label">Precio Oferta</label>
+									<input class="number form-control" type="text" name="precioO" >
+								</div>
+							</div>
+							<div class="w3_agileits_card_number_grid_right">
+								<div class="controls">
+									<label class="control-label">Descripcion:</label>
+									<!--<input class=" form-control" type="text" name="Dirrecion" >-->
+									<textarea class="form-control" name="desc" rows="5"></textarea>
+								</div>
+							</div>						
+							<div class="controls">
+								<label class="control-label">Talla</label>
+								<select class="form-control option-w3ls" name="talla" style="padding: 1%;">
+									<?php 
+										include_once '../Controlador/controlador_Lista.php'; 
+										listarTalla();
+									?>
+								</select>
+							</div>
+							<div class="controls">
+								<label class="control-label">Tipo</label>
+								<select class="form-control option-w3ls" name="tipo" style="padding: 1%;">
+									<?php 
+										include_once '../Controlador/controlador_Lista.php'; 
+										listarTipo();
+									?>
+								</select>
+							</div>							
+							<div class="controls">
+								<label class="control-label">Genero</label>
+								<select class="form-control option-w3ls" name="genero" style="padding: 1%;">
+									<?php 
+										include_once '../Controlador/controlador_Lista.php'; 
+										listarGenero();
+									?>
+								</select>
+							</div><br>			
+							<div class="controls">
+								<label class="control-label">Estado:</label>
+								<input class="number form-control" type="text" name="material" >
+							</div>
+						</div><br>
+						<button type="submit" class="btn btn-danger" style="width: 50%">Guardar y Ingresar Img</button>
+				</div>
+			</section>
+		</form>
 	</div>
+	<br>
 <?php 
 	}else{
 		include_once '404.php';

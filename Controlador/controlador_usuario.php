@@ -83,7 +83,7 @@
 		$obj->actualizarUsu();
 
 		echo '<script>alert("Modificado Correctamente")</script>';
-		echo '<script>window.location="Controlador/controlador_usuario.php?op=3"</script>';
+		echo '<script>window.location="controlador_usuario.php?op=1"</script>';
 	}
 
 	function eliminarUsuario(){		

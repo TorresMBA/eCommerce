@@ -70,7 +70,6 @@
 	}
 
 	function ingresarImg(){
-
 		$id = $_POST['id'];
 		$img1 = $_FILES['txtImg1']['name'];
 		$img2 = $_FILES['txtImg2']['name'];
