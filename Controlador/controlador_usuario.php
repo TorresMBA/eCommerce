@@ -30,6 +30,7 @@
 	}
 
 	function insertarUsuario(){
+		ini_set('date.timezone', 'America/Lima');
 		$obj = new Usuario();
 		$nom = $_POST['Name'];
 		$ape = $_POST['Ape'];
@@ -38,6 +39,8 @@
 		$dirrecion = $_POST['Dirrecion'];
 		$usu = $_POST['Usuario'];
 		$pass = $_POST['Pass'];
+		$fecha = date('Y-m-d');
+		$hora = date('H:i:s');
 		//$est = $_POST['est'];
 
 		$obj->setNom($nom);
@@ -47,6 +50,8 @@
 		$obj->setDirrecion($dirrecion);
 		$obj->setUsu($usu);
 		$obj->setPass($pass);
+		$obj->setFecha($fecha);
+		$obj->setHora($hora);
 		$obj->setEst('A');
 		$obj->insertarUsu();
 		echo '<script>alert("Usuario Ingresado Correctamente")</script>';

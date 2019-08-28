@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-08-2019 a las 03:03:58
+-- Tiempo de generación: 28-08-2019 a las 05:38:18
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -66,8 +66,8 @@ INSERT INTO FOTO(COD_SEA, FOTO1, FOTO2, FOTO3, FOTO4) VALUES(ID, FOT1, FOT2, FOT
 CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERTARUSUADMIN` (IN `ID` INT, IN `NOM` VARCHAR(30), IN `APE` VARCHAR(30), IN `MAIL` VARCHAR(40), IN `CEL` CHAR(9), IN `DIREC` VARCHAR(30), IN `USU` VARCHAR(15), IN `PASS` VARCHAR(15), IN `EST` CHAR(1))  NO SQL
 INSERT INTO USUARIO(ID_ROL, NOMBRE, APELLIDO, EMAIL, CELULAR, DIRRECION, NOM_USU, PASS, ESTADO) VALUES(ID, NOM, APE, MAIL, CEL, DIREC, USU, PASS, EST)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERTARUSUARIOS` (IN `NOM` VARCHAR(30), IN `APE` VARCHAR(30), IN `MAIL` VARCHAR(30), IN `CEL` CHAR(30), IN `DIREC` VARCHAR(30), IN `USU` VARCHAR(20), IN `PASS` VARCHAR(20), IN `EST` CHAR(1))  NO SQL
-INSERT INTO USUARIO(ID_ROL, NOMBRE, APELLIDO, EMAIL, CELULAR, DIRRECION, NOM_USU, PASS, ESTADO) VALUES(2, NOM, APE, MAIL, CEL, DIREC, USU, PASS, EST)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERTARUSUARIOS` (IN `NOM` VARCHAR(30), IN `APE` VARCHAR(30), IN `MAIL` VARCHAR(30), IN `CEL` CHAR(30), IN `DIREC` VARCHAR(30), IN `USU` VARCHAR(20), IN `PASS` VARCHAR(20), IN `FECH` DATE, IN `HOUR` TIME, IN `EST` CHAR(1))  NO SQL
+INSERT INTO USUARIO(ID_ROL, NOMBRE, APELLIDO, EMAIL, CELULAR, DIRRECION, NOM_USU, PASS, FECHA_CREA, HORA_CREA, ESTADO) VALUES(2, NOM, APE, MAIL, CEL, DIREC, USU, PASS, FECH, HOUR, EST)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LISTARCALZADO` (IN `ID` INT)  NO SQL
 SELECT C.COD_SEA, C.NOMBRE, M.NOM_MARCA, F.FOTO1, F.FOTO2, F.FOTO3, F.FOTO4, C.PRECIO_NORMAL, C.PRECIO_OFERTA, C.DESCRIPCION, T.TALLA, TI.NOM_TIPO, G.TIPO_GEN, C.MATERIAL
@@ -314,6 +314,7 @@ CREATE TABLE `usuario` (
   `CELULAR` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `DIRRECION` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `FECHA_CREA` date NOT NULL,
+  `HORA_CREA` time NOT NULL,
   `ESTADO` char(1) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
@@ -321,11 +322,9 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`ID_LOG`, `ID_ROL`, `NOM_USU`, `PASS`, `NOMBRE`, `APELLIDO`, `EMAIL`, `CELULAR`, `DIRRECION`, `FECHA_CREA`, `ESTADO`) VALUES
-(1, 1, 'admin', '123', 'Brian Anthony', 'Torres Menacho', 'bryan98tm@gmail.com', '972101160', 'Mz T Lt 1-A', '0000-00-00', 'A'),
-(24, 2, 'usu', '123', 'Estefany Reyna', 'Torres Menacho', 'estefany123@gmail.com', '934626785', 'Mz T Lt 1-A', '0000-00-00', 'A'),
-(28, 2, 'usu1', '123', 'Nombre Practica', 'Ingresando Usuario', 'usu@gmail.com', '995979223', 'Av.Abancay', '0000-00-00', 'A'),
-(29, 1, 'usu2', '123', 'Peluche', 'Zapra', 'zapra@gmail.com', '123456789', 'Av.Mate Pumacahua', '0000-00-00', 'D');
+INSERT INTO `usuario` (`ID_LOG`, `ID_ROL`, `NOM_USU`, `PASS`, `NOMBRE`, `APELLIDO`, `EMAIL`, `CELULAR`, `DIRRECION`, `FECHA_CREA`, `HORA_CREA`, `ESTADO`) VALUES
+(1, 1, 'admin', '123', 'Brian Anthony', 'Torres Menacho', 'bryan98tm@gmail.com', '972101160', 'Mz T Lt 1-A', '2019-08-27', '22:27:09', 'A'),
+(2, 2, 'usu', '123', 'Anthony Brian', 'Torres Menacho', 'anthony98@gmail.com', '995979223', 'Mz Q Lote 1', '2019-08-27', '22:36:52', 'A');
 
 --
 -- Índices para tablas volcadas
@@ -435,7 +434,7 @@ ALTER TABLE `tipo`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_LOG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ID_LOG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

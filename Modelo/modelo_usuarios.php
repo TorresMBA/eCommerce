@@ -8,7 +8,9 @@
 		private $dirrecion;
 		private $usu;
 		private $pass;
+		private $fecha;
 		private $est;
+		private $hora;
 
 		private $db;
 		private $lista;
@@ -55,6 +57,14 @@
 			return $this->est;
 		}
 
+		public function getFecha(){
+			return $this->fecha;
+		}
+
+		public function getHora(){
+			return $this->hora;
+		}
+
 		public function setId($id){
 			$this->id = $id;
 		}
@@ -91,6 +101,14 @@
 			$this->est= $est;
 		}
 
+		public function setFecha($fecha){
+			$this->fecha= $fecha;
+		}
+
+		public function setHora($hora){
+			$this->hora = $hora;
+		}
+
 		public function listarUsu(){
 			$sql = $this->db->query("CALL LISTARUSUARIO");
 			while ($fila = $sql->fetch(PDO::FETCH_ASSOC)) {
@@ -100,7 +118,7 @@
 		}
 
 		public function insertarUsu(){
-			$sql = "CALL INSERTARUSUARIOS (?,?,?,?,?,?,?,?)";
+			$sql = "CALL INSERTARUSUARIOS (?,?,?,?,?,?,?,?,?,?)";
 			$dato = $this->db->prepare($sql);
 			$dato->bindParam(1, $this->nom);
 			$dato->bindParam(2, $this->ape);
@@ -109,7 +127,9 @@
 			$dato->bindParam(5, $this->dirrecion);
 			$dato->bindParam(6, $this->usu);
 			$dato->bindParam(7, $this->pass);
-			$dato->bindParam(8, $this->est);
+			$dato->bindParam(8, $this->fecha);
+			$dato->bindParam(9, $this->hora);
+			$dato->bindParam(10, $this->est);
 			$dato->execute();
 		}
 
