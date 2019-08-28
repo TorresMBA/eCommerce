@@ -1,6 +1,5 @@
 <?php
-	include 'header.php';
-
+	include_once 'header.php';
 	if (isset($_SESSION['carrito'])) {
 		if(isset($_GET['id'])){
 			$arreglo  = $_SESSION['carrito'];
@@ -47,6 +46,7 @@
 			$_SESSION['carrito'] = $arreglo;
 		}
 	}
+
 ?>
 	<div class="ads-grid_shop">
 		<div class="shop_inner_inf">
@@ -84,10 +84,14 @@
 									<div class="quantity">
 										<div class="quantity-select">
 											<!--<div class="entry value-minus">&nbsp;</div>-->
-											<div class="entry value"><span><input type="text" value="<?php echo $dato[$i]['Cantidad'] ?>" 
+											<div class="entry value">
+												<span>
+													<input type="text" value="<?php echo $dato[$i]['Cantidad'] ?>" 
 													data-precio="<?php echo $dato[$i]['Precio'] ?>"
 													data-id="<?php echo $dato[$i]['Id'] ?>"
-													class="cantidad"></span></div>
+													class="cantidad">
+												</span>
+											</div>
 											<!--<div class="entry value-plus active">&nbsp;</div>-->
 										</div>
 									</div>
@@ -101,8 +105,7 @@
 									</div>
 								</td>
 							</tr>	
-							<?php 	
-										$total = ($dato[$i]['Cantidad'] *  $dato[$i]['Precio']) + $total;
+							<?php 						
 									}
 								}else{
 									echo '<h4>Tu carrito esta vacio</h4>';
@@ -111,16 +114,29 @@
 							?>		
 						</tbody>
 					</table>
-					
 				</div>
 				<div class="checkout-left">
 					<div class="col-md-4 checkout-left-basket">
 						<h4>Detalles de Compra</h4>
 						<ul>
-							<?php for($i = 0; $i < count($dato); $i++) { ?>
-							<li><?php echo $dato[$i]['Nom'] ?>&nbsp;Cantidad:<?php echo $dato[$i]['Cantidad'] ?><span>S/<?php echo $dato[$i]['Precio'] ?></span></li>
-							<?php } ?>
-							<li>SubTotal: <span id="total">S/<?php echo $total; ?></span></li>
+							<?php 
+								for($i = 0; $i < count($dato); $i++) { 
+									$subtotal = $dato[$i]['Cantidad'] * $dato[$i]['Precio'];
+									$total = ($dato[$i]['Cantidad'] *  $dato[$i]['Precio']) + $total;
+							?>
+								<li>
+									<?php echo $dato[$i]['Nom'] ?>&nbsp;Cantidad:<?php echo $dato[$i]['Cantidad'] ?>
+									<span>S/<?php echo $dato[$i]['Precio'] ?></span>
+								</li>
+							<?php 
+								}
+							 ?>
+								<li>
+									SubTotal: <span class="subtotal">S/<?php echo $subtotal ?></span>
+								</li>
+								<li>
+									Total: <span id="total">S/<?php echo $total; ?></span>
+								</li>
 						</ul>
 					</div>
 					<div class="col-md-8 address_form">
@@ -175,6 +191,7 @@
 			</div>
 		</div>
 	</div>
+
 <?php
 	include 'footer.php';
 ?>

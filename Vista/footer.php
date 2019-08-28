@@ -213,7 +213,7 @@
 	</div>
     <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
-<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>	
+
 	<script src="../js/minicart.js"></script>
 	<script>
 		shoe.render();

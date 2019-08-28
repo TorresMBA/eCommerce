@@ -34,6 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link rel="stylesheet" href="../css/shop.css" type="text/css" media="screen" property="" />
 	<link rel="stylesheet" href="../css/about.css" type="text/css" media="screen" property="" />
 	<link href="../css/font-awesome.css" rel="stylesheet">
+	<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="../js/carrito.js"></script>
 	<!-- //font-awesome-icons -->
 	<link href="//fonts.googleapis.com/css?family=Montserrat:100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
