@@ -32,7 +32,7 @@
 				<p><span class="item_price">S/<?php echo $fila['PRECIO_OFERTA']?></span>
 					<del>S/<?php echo $fila['PRECIO_NORMAL'] ?></del>
 				</p>
-				<div class="rating1">
+				<!--<div class="rating1">
 					<ul class="stars">
 						<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
 						<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
@@ -40,7 +40,7 @@
 						<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
 						<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
 					</ul>
-				</div>
+				</div>-->
 				<div class="description">
 					<h5>Verifique la entrega, las opciones de pago y los cargos en su ubicación</h5>
 					<form action="#" method="post">
@@ -119,41 +119,76 @@
 						<div class="tab1">
 							<div class="single_page">
 								<h6><?php echo $fila['NOMBRE']?></h6>
-								<p><?PHP ECHO $fila['DESCRIPCION']?></p>	
+								<p><?PHP echo $fila['DESCRIPCION']?></p>	
 							</div>
-						</div>
+						</div><?php } ?>
 						<!--//tab_one-->
+						
 						<div class="tab2">
 							<div class="single_page">
-								<div class="bootstrap-tab-text-grids">
+								<div class="bootstrap-tab-text-grids">				
+									<div class="add-review">
+										<h4>Agregar comentario</h4>
+										<?php 
+											if (isset($_SESSION['usuario'])) {
+												$usu = $_SESSION['id'];
+											}else{
+												$usu = 0;
+											}
+										?>
+										<form action="controlador_coments.php?op=2&id_p=<?php echo $_GET['id'] ?>&id_usu=<?php echo $usu ?>" method="post">
+											<p>Escoga una Calificación</p>
+											<select class="form-control" name="star">
+												<option value="1">1 Estrella</option>
+												<option value="2">2 Estrella</option>
+												<option value="3">3 Estrella</option>
+												<option value="4">4 Estrella</option>
+												<option value="5">5 Estrella</option>
+											</select>
+											<textarea name="comen" required="" placeholder="Mensaje..."></textarea>
+											<input type="submit" value="Comentar" >
+										</form>
+									</div>
+									<?php 
+										include_once '../Controlador/controlador_comentario.php';
+										$comen = listarComentarios($_GET['id']);
+										foreach($comen as $fila){
+									?>
 									<div class="bootstrap-tab-text-grid">
 										<div class="bootstrap-tab-text-grid-left">
 											<img src="../images/t1.jpg" alt=" " class="img-responsive">
 										</div>
-										<div class="bootstrap-tab-text-grid-right">
+										<div class="bootstrap-tab-text-grid-right">			
 											<ul>
-												<li><a href="#">Admin</a></li>
-												<li><a href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</a></li>
+												<li><a href="#"><?php echo $fila['NOM_USU'] ?></a></li>
+												<li><a href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Responder</a></li>
 											</ul>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget.Ut enim ad minima veniam,
-												quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
-												autem vel eum iure reprehenderit.</p>
+											<p><?php echo $fila['COMENTARIO'] ?></p>
 										</div>
-										<div class="clearfix"> </div>
+										<div class="clearfix"></div>
+										<div class="rating1">
+											<p>Calificación:</p>
+											<ul class="stars">											
+												<?php 
+													for ($i=0; $i < $fila['RATING']; $i++) { 												
+														echo '<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>';
+													}
+													$star = 5 - $fila['RATING'];
+													for ($i=0; $i < $star; $i++) { 													
+														echo '<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>';
+													}
+												?>
+											</ul>
+										</div>
 									</div>
-									<div class="add-review">
-										<h4>Agregar comentario</h4>
-										<form action="#" method="post">
-											<input type="text" name="Name" required="Name">
-											<input type="email" name="Email" required="Email">
-											<textarea name="Message" required=""></textarea>
-											<input type="submit" value="SEND">
-										</form>
-									</div>
+									<br><br>
+									<?php 
+										}
+									?>
 								</div>
-
 							</div>
 						</div>
+						<?php foreach ($datos as $fila) { ?>
 						<div class="tab3">
 						<div class="container">
                             <table class="table table-striped">
