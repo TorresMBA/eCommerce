@@ -1,9 +1,9 @@
 <?php 
 	include_once '../Modelo/modelo_comentario.php';
 
-	$op = $_GET['op'];
 	$id_pro = $_GET['id_p'];
 	$id_usu = $_GET['id_usu'];
+	$op = $_GET['op'];
 
 	if($id_usu == 0){
 		echo '<script>alert("No puedes comentar sin loguearte")</script>';
@@ -11,9 +11,6 @@
 	}
 
 	switch ($op) {
-		case 'value':
-			# code...
-			break;
 		case 2:
 			insertarComentario();
 			break;	

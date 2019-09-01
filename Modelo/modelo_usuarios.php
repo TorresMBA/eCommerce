@@ -6,6 +6,7 @@
 		private $mail;
 		private $cel;
 		private $dirrecion;
+		private $img;
 		private $usu;
 		private $pass;
 		private $fecha;
@@ -109,6 +110,10 @@
 			$this->hora = $hora;
 		}
 
+		public function setImg($img){
+			$this->img = $img;
+		}
+
 		public function listarUsu(){
 			$sql = $this->db->query("CALL LISTARUSUARIO");
 			while ($fila = $sql->fetch(PDO::FETCH_ASSOC)) {
@@ -118,18 +123,19 @@
 		}
 
 		public function insertarUsu(){
-			$sql = "CALL INSERTARUSUARIOS (?,?,?,?,?,?,?,?,?,?)";
+			$sql = "CALL INSERTARUSUARIOS (?,?,?,?,?,?,?,?,?,?,?)";
 			$dato = $this->db->prepare($sql);
 			$dato->bindParam(1, $this->nom);
 			$dato->bindParam(2, $this->ape);
 			$dato->bindParam(3, $this->mail);
 			$dato->bindParam(4, $this->cel);
 			$dato->bindParam(5, $this->dirrecion);
-			$dato->bindParam(6, $this->usu);
-			$dato->bindParam(7, $this->pass);
-			$dato->bindParam(8, $this->fecha);
-			$dato->bindParam(9, $this->hora);
-			$dato->bindParam(10, $this->est);
+			$dato->bindParam(6, $this->img);
+			$dato->bindParam(7, $this->usu);
+			$dato->bindParam(8, $this->pass);
+			$dato->bindParam(9, $this->fecha);
+			$dato->bindParam(10, $this->hora);
+			$dato->bindParam(11, $this->est);
 			$dato->execute();
 		}
 

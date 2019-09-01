@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-08-2019 a las 05:38:18
+-- Tiempo de generación: 01-09-2019 a las 19:12:35
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -60,14 +60,17 @@ DELETE FROM USUARIO WHERE ID_LOG = ID$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERTARCALZADO` (IN `NOMBRE` VARCHAR(30), IN `IDMARCA` INT, IN `PRECION` FLOAT, IN `PRECIOO` FLOAT, IN `DESCR` VARCHAR(300), IN `IDTALLA` INT, IN `IDTIPO` INT, IN `IDGEN` INT, IN `MAT` VARCHAR(25))  NO SQL
 INSERT INTO CALZADO(NOMBRE, ID_MARCA, PRECIO_NORMAL, PRECIO_OFERTA, DESCRIPCION, ID_TALLA, ID_TIPO, ID_GENERO, MATERIAL) VALUES(NOMBRE, IDMARCA, PRECION, PRECIOO, DESCR, IDTALLA, IDTIPO, IDGEN, MAT)$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERTARCOMENTARIO` (IN `IDUSU` INT, IN `IDPROD` INT, IN `COMEN` VARCHAR(300), IN `RAT` INT)  NO SQL
+INSERT INTO comentario(COD_SEA, ID_LOG, COMENTARIO, RATING) VALUES(IDPROD, IDUSU, COMEN, RAT)$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERTARIMG` (IN `ID` INT, IN `FOT1` VARCHAR(25), IN `FOT2` VARCHAR(25), IN `FOT3` VARCHAR(25), IN `FOT4` VARCHAR(25))  NO SQL
 INSERT INTO FOTO(COD_SEA, FOTO1, FOTO2, FOTO3, FOTO4) VALUES(ID, FOT1, FOT2, FOT3, FOT4)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERTARUSUADMIN` (IN `ID` INT, IN `NOM` VARCHAR(30), IN `APE` VARCHAR(30), IN `MAIL` VARCHAR(40), IN `CEL` CHAR(9), IN `DIREC` VARCHAR(30), IN `USU` VARCHAR(15), IN `PASS` VARCHAR(15), IN `EST` CHAR(1))  NO SQL
 INSERT INTO USUARIO(ID_ROL, NOMBRE, APELLIDO, EMAIL, CELULAR, DIRRECION, NOM_USU, PASS, ESTADO) VALUES(ID, NOM, APE, MAIL, CEL, DIREC, USU, PASS, EST)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERTARUSUARIOS` (IN `NOM` VARCHAR(30), IN `APE` VARCHAR(30), IN `MAIL` VARCHAR(30), IN `CEL` CHAR(30), IN `DIREC` VARCHAR(30), IN `USU` VARCHAR(20), IN `PASS` VARCHAR(20), IN `FECH` DATE, IN `HOUR` TIME, IN `EST` CHAR(1))  NO SQL
-INSERT INTO USUARIO(ID_ROL, NOMBRE, APELLIDO, EMAIL, CELULAR, DIRRECION, NOM_USU, PASS, FECHA_CREA, HORA_CREA, ESTADO) VALUES(2, NOM, APE, MAIL, CEL, DIREC, USU, PASS, FECH, HOUR, EST)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERTARUSUARIOS` (IN `NOM` VARCHAR(30), IN `APE` VARCHAR(30), IN `MAIL` VARCHAR(30), IN `CEL` CHAR(30), IN `DIREC` VARCHAR(30), IN `FOTO` VARCHAR(25), IN `USU` VARCHAR(20), IN `PASS` VARCHAR(20), IN `FECH` DATE, IN `HOUR` TIME, IN `EST` CHAR(1))  NO SQL
+INSERT INTO USUARIO(ID_ROL, NOMBRE, APELLIDO, EMAIL, CELULAR, DIRRECION, FOTO, NOM_USU, PASS, FECHA_CREA, HORA_CREA, ESTADO) VALUES(2, NOM, APE, MAIL, CEL, DIREC, FOTO, USU, PASS, FECH, HOUR, EST)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LISTARCALZADO` (IN `ID` INT)  NO SQL
 SELECT C.COD_SEA, C.NOMBRE, M.NOM_MARCA, F.FOTO1, F.FOTO2, F.FOTO3, F.FOTO4, C.PRECIO_NORMAL, C.PRECIO_OFERTA, C.DESCRIPCION, T.TALLA, TI.NOM_TIPO, G.TIPO_GEN, C.MATERIAL
@@ -85,6 +88,20 @@ INNER JOIN FOTO F ON C.COD_SEA = F.COD_SEA
 INNER JOIN TALLA T ON C.ID_TALLA = T.ID_TALLA
 INNER JOIN TIPO TI ON C.ID_TIPO = TI.ID_TIPO
 INNER JOIN GENERO G ON C.ID_GENERO = G.ID_GENERO$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LISTARCOMENLIMIT` (IN `ID` INT, IN `INICIO` INT, IN `FIN` INT)  NO SQL
+SELECT U.NOM_USU, CA.NOMBRE, CO.COMENTARIO, CO.RATING, u.FOTO
+FROM COMENTARIO CO 
+INNER JOIN CALZADO CA ON CO.COD_SEA = CA.COD_SEA
+INNER JOIN USUARIO U ON CO.ID_LOG = U.ID_LOG
+WHERE CO.COD_SEA = ID LIMIT INICIO, FIN$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LISTARCOMENTARIOS` (IN `ID` INT)  NO SQL
+SELECT U.NOM_USU, CA.NOMBRE, CO.COMENTARIO, CO.RATING, u.FOTO
+FROM COMENTARIO CO 
+INNER JOIN CALZADO CA ON CO.COD_SEA = CA.COD_SEA
+INNER JOIN USUARIO U ON CO.ID_LOG = U.ID_LOG
+WHERE CO.COD_SEA = ID$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LISTARUSUARIO` ()  NO SQL
 SELECT U.*, R.NOM_ROL
@@ -145,6 +162,45 @@ INSERT INTO `calzado` (`COD_SEA`, `NOMBRE`, `ID_MARCA`, `PRECIO_NORMAL`, `PRECIO
 (17, 'Zapatillas Urbanas', 1, 169, 99, 'lorem lorem loremlorem', 9, 2, 1, 'Tela'),
 (65, 'Zaptillas Running Air Max Sequ', 2, 500.1, 409.5, 'Las Nike Air Max Sequent 3 son unas zapatillas de running perfectas para las carreras cortas en las que necesitas una gran amortiguación. La parte superior tejida y elástica se mueve con los pies en cada pisada. Con ciertos toques que recuerdan a la Air Max orignal.  Pensada para corredores habitual', 1, 5, 2, 'Tela'),
 (74, 'Zapatilla Nike Flex Contact 2', 2, 300, 209.3, 'El calzado de running para hombre Nike Flex Contact 2 brinda una sensación natural y un diseño elegante. En el antepié, la malla es elástica para dejar más espacio para los dedos, y el mediopié cuenta con una malla más ceñida que ofrece sujeción. El patrón gráfico tri-star en la suela funciona con u', 11, 1, 1, 'Tela');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comentario`
+--
+
+CREATE TABLE `comentario` (
+  `ID_COMEN` int(11) NOT NULL,
+  `ID_LOG` int(11) NOT NULL,
+  `COD_SEA` int(11) NOT NULL,
+  `COMENTARIO` varchar(500) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `RATING` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `comentario`
+--
+
+INSERT INTO `comentario` (`ID_COMEN`, `ID_LOG`, `COD_SEA`, `COMENTARIO`, `RATING`) VALUES
+(1, 1, 1, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 4),
+(2, 1, 2, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 4),
+(3, 1, 3, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 4),
+(4, 1, 4, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 2),
+(5, 1, 5, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 3),
+(6, 1, 6, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 4),
+(7, 1, 7, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 5),
+(8, 1, 8, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 1),
+(9, 1, 9, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 2),
+(10, 1, 10, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 3),
+(11, 1, 11, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 4),
+(12, 1, 11, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 5),
+(13, 1, 12, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 1),
+(14, 1, 13, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 2),
+(15, 1, 14, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 3),
+(16, 1, 15, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 4),
+(17, 1, 17, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 5),
+(18, 1, 65, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 1),
+(19, 1, 74, 'La mejora zapatilla que probé, excelente calidad y ni que hablar sobre el precio. 5/5', 2);
 
 -- --------------------------------------------------------
 
@@ -231,6 +287,16 @@ INSERT INTO `marca` (`ID_MARCA`, `NOM_MARCA`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pedido`
+--
+
+CREATE TABLE `pedido` (
+  `ID_PEDIDO` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `rol`
 --
 
@@ -313,6 +379,7 @@ CREATE TABLE `usuario` (
   `EMAIL` varchar(25) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `CELULAR` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `DIRRECION` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `FOTO` varchar(25) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `FECHA_CREA` date NOT NULL,
   `HORA_CREA` time NOT NULL,
   `ESTADO` char(1) COLLATE utf8mb4_spanish2_ci NOT NULL
@@ -322,9 +389,11 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`ID_LOG`, `ID_ROL`, `NOM_USU`, `PASS`, `NOMBRE`, `APELLIDO`, `EMAIL`, `CELULAR`, `DIRRECION`, `FECHA_CREA`, `HORA_CREA`, `ESTADO`) VALUES
-(1, 1, 'admin', '123', 'Brian Anthony', 'Torres Menacho', 'bryan98tm@gmail.com', '972101160', 'Mz T Lt 1-A', '2019-08-27', '22:27:09', 'A'),
-(2, 2, 'usu', '123', 'Anthony Brian', 'Torres Menacho', 'anthony98@gmail.com', '995979223', 'Mz Q Lote 1', '2019-08-27', '22:36:52', 'A');
+INSERT INTO `usuario` (`ID_LOG`, `ID_ROL`, `NOM_USU`, `PASS`, `NOMBRE`, `APELLIDO`, `EMAIL`, `CELULAR`, `DIRRECION`, `FOTO`, `FECHA_CREA`, `HORA_CREA`, `ESTADO`) VALUES
+(1, 1, 'admin', '123', 'Brian Anthony', 'Torres Menacho', 'bryan98tm@gmail.com', '972101160', 'Mz T Lt 1-A', 'perf1.jpg', '2019-08-27', '22:27:09', 'A'),
+(2, 2, 'Usuario', '123', 'Anthony Brian', 'Torres Menacho', 'anthony98@gmail.com', '995979223', 'Mz Q Lote 1', 'perf2.png', '2019-08-27', '22:36:52', 'A'),
+(4, 2, 'Michigun', '123', 'Brian', 'Torres Menacho', 'bryan98tm@gmail.com', '972101160', 'Mz T Lt 1-A', 'perf.3jpg', '2019-08-30', '15:46:12', 'A'),
+(6, 2, 'Briantm3', '123', 'Brian', 'Torres', 'bryan98tm@gmail.com', '972101160', 'Mz T Lt 1-A', '123.jpeg', '2019-08-30', '16:52:24', 'A');
 
 --
 -- Índices para tablas volcadas
@@ -339,6 +408,14 @@ ALTER TABLE `calzado`
   ADD KEY `ID_TALLA` (`ID_TALLA`),
   ADD KEY `ID_MARCA` (`ID_MARCA`),
   ADD KEY `ID_TIPO` (`ID_TIPO`);
+
+--
+-- Indices de la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  ADD PRIMARY KEY (`ID_COMEN`),
+  ADD KEY `ID_LOG` (`ID_LOG`),
+  ADD KEY `COD_SEA` (`COD_SEA`);
 
 --
 -- Indices de la tabla `foto`
@@ -358,6 +435,12 @@ ALTER TABLE `genero`
 --
 ALTER TABLE `marca`
   ADD PRIMARY KEY (`ID_MARCA`);
+
+--
+-- Indices de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD PRIMARY KEY (`ID_PEDIDO`);
 
 --
 -- Indices de la tabla `rol`
@@ -395,6 +478,12 @@ ALTER TABLE `calzado`
   MODIFY `COD_SEA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
+-- AUTO_INCREMENT de la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  MODIFY `ID_COMEN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
 -- AUTO_INCREMENT de la tabla `foto`
 --
 ALTER TABLE `foto`
@@ -411,6 +500,12 @@ ALTER TABLE `genero`
 --
 ALTER TABLE `marca`
   MODIFY `ID_MARCA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  MODIFY `ID_PEDIDO` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -434,7 +529,7 @@ ALTER TABLE `tipo`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_LOG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_LOG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -448,6 +543,13 @@ ALTER TABLE `calzado`
   ADD CONSTRAINT `FK_MARCA` FOREIGN KEY (`ID_MARCA`) REFERENCES `marca` (`ID_MARCA`),
   ADD CONSTRAINT `FK_TALLA` FOREIGN KEY (`ID_TALLA`) REFERENCES `talla` (`ID_TALLA`),
   ADD CONSTRAINT `FK_TIPO` FOREIGN KEY (`ID_TIPO`) REFERENCES `tipo` (`ID_TIPO`);
+
+--
+-- Filtros para la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  ADD CONSTRAINT `FK_SEA` FOREIGN KEY (`COD_SEA`) REFERENCES `calzado` (`COD_SEA`),
+  ADD CONSTRAINT `FK_USU` FOREIGN KEY (`ID_LOG`) REFERENCES `usuario` (`ID_LOG`);
 
 --
 -- Filtros para la tabla `foto`

@@ -32,10 +32,21 @@
 
  	public function listarComentarios($prod){
  		$sql = $this->db->query('CALL LISTARCOMENTARIOS("'.$prod.'")');
- 		while ($fila = $sql->fetch(PDO::FETCH_ASSOC)) {
- 			$this->comets[] = $fila;
+ 		while ($fila = $sql->fetch(PDO::FETCH_ASSOC)) { 
+ 			$this->coments[] = $fila;
  		}
- 		return $this->comets;
+ 		return $this->coments;
+ 	}
+
+ 	public function listarComentarios2($prod){
+ 		$sql = "CALL LISTARCOMENTARIOS(?)";
+ 		$dato = $this->db->prepare($sql);
+ 		$dato->BindParam(1, $this->id_prod);
+ 		$dato->execute();
+ 		$cants = $dato->fetchAll();
+ 		$regis = count($cants);
+ 		$cant = $dato->rowCount();
+ 		return $regis;
  	}
 
  	public function insertarComentario(){
@@ -47,7 +58,21 @@
  		$insertar->BindParam(4, $this->star);
  		$insertar->execute();
  	}
- }
+ 	
+ 	public function cantComen($id){
+ 		$sql = 'SELECT * FROM COMENTARIO WHERE COD_SEA ="'.$id.'"  ';
+ 		$ejecutar = $this->db->prepare($sql);
+ 		$ejecutar->execute();
+ 		$total = $ejecutar->rowCount();
+ 		return $total;
+ 	}
 
-
+ 	public function listarComenPerso($iniciar, $narticulos, $id){
+ 		$sql = $this->db->query('CALL LISTARCOMENLIMIT("'.$iniciar.'", "'.$narticulos.'", "'.$id.'")  ');
+ 		while ($fila = $sql->fetch(PDO::FETCH_ASSOC)) { 
+ 			$this->coments[] = $fila;
+ 		}
+ 		return $this->coments;
+ 	}
+}
 ?>

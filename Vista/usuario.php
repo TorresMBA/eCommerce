@@ -3,7 +3,7 @@
 	if (!isset($_SESSION['usuario'])) {
 		echo '<script>alert("Debes Loguearte como administrador")</script>';
 		echo '<script>window.location="../Vista/login.php"</script>';
-	}else if (isset($_SESSION['usuario']) && $_SESSION['rol'] == 1){
+	}else if (isset($_SESSION['usuario'])){
 ?>
 	<div class="container" style="width: 50%"> 	
 		<br><br>
@@ -68,7 +68,6 @@
 	<br>
 <?php 
 	}else{
-		echo '<script>alert("Debes Loguearte primero")</script>';
 		include_once '404.php';
 	}
 	include 'footer.php'; 

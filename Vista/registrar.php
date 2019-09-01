@@ -11,7 +11,24 @@
 		<div class=" contact_grid_right">
 			<h6>Rellene los datos para Registrarse.</h6>
 		</div>
-		<form action="../Controlador/controlador_usuario.php?op=2" method="post" class="creditly-card-form agileinfo_form">
+		<script>
+            function init(){       
+                var inputFile = document.getElementById('txtImg');
+                inputFile.addEventListener('change', mostrarImagen, false);
+            }
+            function mostrarImagen(event){
+                
+                var file = event.target.files[0];
+                var leer = new FileReader();
+                leer.onload = function(event){
+                    var img = document.getElementById('imgUsu');
+                    img.src= event.target.result;                    
+                }
+                leer.readAsDataURL(file);
+            }
+            window.addEventListener('load', init, false)
+        </script>
+		<form action="../Controlador/controlador_usuario.php?op=2" method="post" class="creditly-card-form agileinfo_form" enctype="multipart/form-data" >
 			<section class="creditly-wrapper wthree, w3_agileits_wrapper">
 				<div class="credit-card-wrapper">
 						<div class="first-row form-group">
@@ -42,6 +59,11 @@
 							<div class="controls">
 								<label class="control-label">Dirrecion</label>
 								<input class=" form-control" type="text" name="Dirrecion">
+							</div>
+							<div class="controls">
+								<label class="control-label">Foto de Perfil</label>
+								  <img id="imgUsu" width="150" height="150" /> <br>							
+								  <input class="form-control" type="file" name="txtImg" id="txtImg"  required="">
 							</div>
 							<div class="controls">
 								<label class="control-label">Nombre de Usuario</label>

@@ -1,16 +1,18 @@
 <?php
 	include 'header.php';
 ?>
-
 	<div class="ads-grid_shop">
 		<?php 
-					foreach ($datos as $fila) {
-				?>
+			if (!isset($_GET['pag'])) {
+				echo '<script>window.location="controlador_sneakers.php?op=2&id='.$_GET['id'].'&pag=1"</script>';
+			}
+					
+			foreach ($datos as $fila) {
+		?>
 		<div class="shop_inner_inf">
 			<div class="col-md-4 single-right-left ">
 				<div class="grid images_3_of_2">
 					<div class="flexslider">
-
 						<ul class="slides">
 							<li data-thumb="../images/img/<?php echo $fila['FOTO2'] ?>">
 								<div class="thumb-image"> <img src="../images/img/<?php echo $fila['FOTO2'] ?>" data-imagezoom="true" class="img-responsive"> </div>
@@ -32,15 +34,6 @@
 				<p><span class="item_price">S/<?php echo $fila['PRECIO_OFERTA']?></span>
 					<del>S/<?php echo $fila['PRECIO_NORMAL'] ?></del>
 				</p>
-				<!--<div class="rating1">
-					<ul class="stars">
-						<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-					</ul>
-				</div>-->
 				<div class="description">
 					<h5>Verifique la entrega, las opciones de pago y los cargos en su ubicación</h5>
 					<form action="#" method="post">
@@ -103,7 +96,6 @@
 						</a>
 					</li>
 				</ul>
-
 			</div>
 			<div class="clearfix"> </div>
 			<!--/tabs-->
@@ -121,10 +113,12 @@
 								<h6><?php echo $fila['NOMBRE']?></h6>
 								<p><?PHP echo $fila['DESCRIPCION']?></p>	
 							</div>
-						</div><?php } ?>
-						<!--//tab_one-->
-						
-						<div class="tab2">
+						</div>
+					<?php 
+						} 
+					?>
+						<!--//tab_one-->						
+						<div class="tab2" id="tab2">
 							<div class="single_page">
 								<div class="bootstrap-tab-text-grids">				
 									<div class="add-review">
@@ -151,12 +145,20 @@
 									</div>
 									<?php 
 										include_once '../Controlador/controlador_comentario.php';
-										$comen = listarComentarios($_GET['id']);
-										foreach($comen as $fila){
+
+										$arti = 3;
+										$totaldb = cantidad($_GET['id']);
+										$paginas = $totaldb / 3;
+										$paginas = ceil($paginas);									
+
+										$iniciar = ($_GET['pag']-1) * $arti;
+										
+										$mostrar = listarComenPerso($iniciar, $arti, $_GET['id']);
+										foreach($mostrar as $fila){
 									?>
 									<div class="bootstrap-tab-text-grid">
 										<div class="bootstrap-tab-text-grid-left">
-											<img src="../images/t1.jpg" alt=" " class="img-responsive">
+											<img src="../images/perfil/<?php echo $fila['FOTO'] ?>" alt=" " class="img-responsive">
 										</div>
 										<div class="bootstrap-tab-text-grid-right">			
 											<ul>
@@ -185,38 +187,57 @@
 									<?php 
 										}
 									?>
+									<nav aria-label="Page navigation example">
+										  <ul class="pagination">										
+										    <li class="page-item <?php echo $_GET['pag']<$paginas ? 'disabled' : '' ?>">
+										    	<a class="page-link" href="controlador_sneakers.php?op=2&id=<?php echo $_GET['id'] ?>&pag=<?php echo $_GET['pag']-1 ?>">Anterior</a>
+										    </li>
+											<?php 
+												for ($i=0; $i < $paginas; $i++) { 
+											?>
+										   	<li class="page-item <?php echo $_GET['pag']==$i+1 ? 'active' : '' ?>">
+										    	<a class="page-link" href="controlador_sneakers.php?op=2&id=<?php echo $_GET['id'] ?>&pag=<?php echo $i+1; ?>"><?php echo $i+1; ?></a>
+										    </li>
+										   
+											<?php } ?>
+										    <li class="page-item <?php echo $_GET['pag']>=$paginas ? 'disabled' : '' ?>">
+										    	<a class="page-link" href="controlador_sneakers.php?op=2&id=<?php echo $_GET['id'] ?>&pag=<?php echo $_GET['pag']+1 ?>">Siguiente</a></li>
+										  </ul>
+									</nav>
 								</div>
 							</div>
 						</div>
-						<?php foreach ($datos as $fila) { ?>
+						<?php 
+							foreach ($datos as $fila) { 
+						?>
 						<div class="tab3">
-						<div class="container">
-                            <table class="table table-striped">
-									<tr>
-										<td>MARCA </td>
-										<td><?php echo $fila['NOM_MARCA'] ?></td>                                                                   
-									</tr>
-									<tr>
-										<td>TIPO </td>
-										<td><?php echo $fila['NOM_TIPO'] ?></td>                                                                   
-									</tr>
-									<tr>
-										<td>GENERO </td>
-										<td><?php echo $fila['TIPO_GEN'] ?></td>                                                                   
-									</tr>
-									<tr>
-                                    	<td>MATERIAL </td>
-                                        <td><?php echo $fila['MATERIAL'] ?></td>                                                                   
-                                    </tr>
-                                </table>
-                            </div>
+							<div class="container">
+	                     <table class="table table-striped">
+										<tr>
+										    <td>MARCA </td>
+											<td><?php echo $fila['NOM_MARCA'] ?></td>                                                                   
+										</tr>
+										<tr>
+											<td>TIPO </td>
+											<td><?php echo $fila['NOM_TIPO'] ?></td>                                                                   
+										</tr>
+										<tr>
+											<td>GENERO </td>
+											<td><?php echo $fila['TIPO_GEN'] ?></td>                                                                   
+										</tr>
+										<tr>
+	                              <td>MATERIAL </td>
+	                              <td><?php echo $fila['MATERIAL'] ?></td>                                                                   
+	                           </tr>
+	                     </table>
+	                  </div>
 						</div>
+						<?php 
+							}
+						?>
 					</div>
 				</div>
 			</div>
-			<?php 
-			}
-			?>
 			<!--//tabs-->
 			<!-- /new_arrivals -->
 			<div class="new_arrivals">
@@ -263,7 +284,6 @@
 
 											<a href="#" data-toggle="modal" data-target="#myModal1"></a>
 										</form>
-
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -312,7 +332,6 @@
 
 											<a href="#" data-toggle="modal" data-target="#myModal1"></a>
 										</form>
-
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -361,7 +380,6 @@
 
 											<a href="#" data-toggle="modal" data-target="#myModal1"></a>
 										</form>
-
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -407,10 +425,8 @@
 											<input type="hidden" name="shoe_item" value="Sukun Casuals">
 											<input type="hidden" name="amount" value="505.00">
 											<button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-
 											<a href="#" data-toggle="modal" data-target="#myModal1"></a>
 										</form>
-
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -418,15 +434,11 @@
 						</div>
 					</div>
 				</div>
-
 				<!-- //womens -->
 				<div class="clearfix"></div>
 			</div>
 			<!--//new_arrivals-->
-
-
-		</div>
-		
+		</div>		
 <?php
 	include 'footer.php';
 ?>

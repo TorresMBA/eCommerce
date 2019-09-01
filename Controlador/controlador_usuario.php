@@ -31,28 +31,36 @@
 
 	function insertarUsuario(){
 		ini_set('date.timezone', 'America/Lima');
-		$obj = new Usuario();
+		
 		$nom = $_POST['Name'];
 		$ape = $_POST['Ape'];
 		$mail = $_POST['Email'];
 		$cel = $_POST['Telephone'];
 		$dirrecion = $_POST['Dirrecion'];
+		$foto = $_FILES['txtImg']['name'];
 		$usu = $_POST['Usuario'];
 		$pass = $_POST['Pass'];
 		$fecha = date('Y-m-d');
 		$hora = date('H:i:s');
 		//$est = $_POST['est'];
-
+		
+		$obj = new Usuario();
 		$obj->setNom($nom);
 		$obj->setApe($ape);
 		$obj->setMail($mail);
 		$obj->setCel($cel);
 		$obj->setDirrecion($dirrecion);
+		$obj->setImg($foto);
 		$obj->setUsu($usu);
 		$obj->setPass($pass);
 		$obj->setFecha($fecha);
 		$obj->setHora($hora);
 		$obj->setEst('A');
+		$ruta = $_FILES['txtImg']['tmp_name'];
+		$destino = '../images/perfil/';
+		if (!copy($ruta, $destino.$foto)){
+			echo 'Subida de imagen fallida';
+		}
 		$obj->insertarUsu();
 		echo '<script>alert("Usuario Ingresado Correctamente")</script>';
 		echo '<script>window.location="../index.php"</script>';
